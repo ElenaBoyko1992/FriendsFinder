@@ -1,19 +1,19 @@
 import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostsType} from "../../App";
 
-const Profile = () => {
+type ProfileType = {
+    posts: Array<PostsType>
+}
+
+const Profile = (props: ProfileType) => {
     return (
         <div>
-            <div>
-                {/*                <img
-                    src="https://atlantis-cms-assets.s3.us-east-2.amazonaws.com/styled/be395bb860f928a4764100c82e91951f"
-                    alt=""/>*/}
-            </div>
-            <div>
-                ava + description
-            </div>
-           <MyPosts/>
+            <ProfileInfo/>
+
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }
