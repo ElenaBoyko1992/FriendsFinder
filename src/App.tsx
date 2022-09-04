@@ -9,50 +9,51 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 
-export type MessagesType = {
-    id: number
-    message: string
-}
-
 export type DialogsType = {
     id: number
     name: string
 }
-
+export type MessagesType = {
+    id: number
+    message: string
+}
 export type PostsType = {
     id: number
     message: string
     likesAmount: number
 }
-
-type AppPropsType = {
-    messages: Array<MessagesType>
+export type DialogsPageType = {
     dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+}
+export type ProfilePageType = {
     posts: Array<PostsType>
 }
 
+type AppPropsType = {
+    state: {
+        dialogsPage: DialogsPageType
+        profilePage: ProfilePageType
+    }
+}
 
 const App = (props: AppPropsType) => {
-    const returnDialogs = () => {
-        return (
-            <Dialogs dialogs={props.dialogs} messages={props.messages}/>
-        )
-    }
 
-    const returnProfile = () => {
-        return (
-            <Profile posts = {props.posts}/>
-        )
-    }
-
-        return (
+    return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} component={returnDialogs}/>
-                    <Route path={'/profile'} component={returnProfile}/>
+
+                    {/* <Route path={'/dialogs'} component={Dialogs}/> применять при передаче компоненты без пропсов
+                    <Route path={'/profile'} component={Profile}/> применять при передаче компоненты без пропсов*/}
+
+                    <Route path={'/dialogs'} render={() => <Dialogs
+                        state={props.state.dialogsPage}/>}/> {/*применять при передаче компоненты c пропсами*/}
+                    <Route path={'/profile'} render={() => <Profile
+                        state={props.state.profilePage}/>}/> {/*применять при передаче компоненты c пропсами*/}
+
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>

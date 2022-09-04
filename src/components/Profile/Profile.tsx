@@ -2,10 +2,10 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostsType} from "../../App";
+import {ProfilePageType} from "../../App";
 
 type ProfileType = {
-    posts: Array<PostsType>
+    state: ProfilePageType
 }
 
 const Profile = (props: ProfileType) => {
@@ -13,7 +13,7 @@ const Profile = (props: ProfileType) => {
         <div>
             <ProfileInfo/>
 
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     )
 }
