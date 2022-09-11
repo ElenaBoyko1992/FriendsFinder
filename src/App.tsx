@@ -35,6 +35,7 @@ type AppPropsType = {
         dialogsPage: DialogsPageType
         profilePage: ProfilePageType
     }
+    addPost: (postMessage: string) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -52,7 +53,9 @@ const App = (props: AppPropsType) => {
                     <Route path={'/dialogs'} render={() => <Dialogs
                         state={props.state.dialogsPage}/>}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/profile'} render={() => <Profile
-                        state={props.state.profilePage}/>}/> {/*применять при передаче компоненты c пропсами*/}
+                        state={props.state.profilePage}
+                        addPost={props.addPost}
+                    />}/> {/*применять при передаче компоненты c пропсами*/}
 
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>

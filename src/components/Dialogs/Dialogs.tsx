@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import {DialogsPageType} from "../../App";
 
 type DialogsPropsType = {
-    state : DialogsPageType
+    state: DialogsPageType
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -14,6 +14,13 @@ const Dialogs = (props: DialogsPropsType) => {
 
     let messagesElements = props.state.messages.map(m => <Message message={m.message}/>);
 
+    let newMessageElement: any = React.createRef();
+
+    let sendMessage = () => {
+        let message = newMessageElement.current.value;
+        alert(message)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -21,6 +28,10 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
+            </div>
+            <div>
+                <textarea ref={newMessageElement}></textarea>
+                <button onClick={sendMessage}>send message</button>
             </div>
         </div>
     )

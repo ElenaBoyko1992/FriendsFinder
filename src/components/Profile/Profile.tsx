@@ -6,6 +6,7 @@ import {ProfilePageType} from "../../App";
 
 type ProfileType = {
     state: ProfilePageType
+    addPost: (postMessage: string) => void
 }
 
 const Profile = (props: ProfileType) => {
@@ -13,7 +14,7 @@ const Profile = (props: ProfileType) => {
         <div>
             <ProfileInfo/>
 
-            <MyPosts posts={props.state.posts}/>
+            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
         </div>
     )
 }
