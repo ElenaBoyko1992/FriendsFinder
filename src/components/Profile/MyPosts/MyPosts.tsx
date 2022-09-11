@@ -9,15 +9,14 @@ type MyPostsType = {
 }
 
 const MyPosts = (props: MyPostsType) => {
-
     let postsElements = props.posts.map(p => <Post message={p.message} likesAmount={p.likesAmount}/>)
 
     let newPostElement: any = React.createRef();
 
     let addPost = () => {
-        debugger
         let text = newPostElement.current.value
         props.addPost(text)
+        newPostElement.current.value = '';
     }
 
     return (
