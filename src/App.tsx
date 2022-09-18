@@ -1,41 +1,25 @@
 import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
-import Profile from "./components/Profile/Profile";
+import Profile, {ProfilePageType} from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
-import Dialogs from "./components/Dialogs/Dialogs";
+import Dialogs, {DialogsPageType} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
+import {addMessage, updateNewMessageText} from "./redux/state";
 
-export type DialogsType = {
-    id: number
-    name: string
-}
-export type MessagesType = {
-    id: number
-    message: string
-}
-export type PostsType = {
-    id: number
-    message: string
-    likesAmount: number
-}
-export type DialogsPageType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-}
-export type ProfilePageType = {
-    posts: Array<PostsType>
-}
 
 type AppPropsType = {
     state: {
         dialogsPage: DialogsPageType
         profilePage: ProfilePageType
     }
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    addMessage: () => void
+    updateNewMessageText: (newText: string) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -51,10 +35,14 @@ const App = (props: AppPropsType) => {
                     <Route path={'/profile'} component={Profile}/> применять при передаче компоненты без пропсов*/}
 
                     <Route path={'/dialogs'} render={() => <Dialogs
-                        state={props.state.dialogsPage}/>}/> {/*применять при передаче компоненты c пропсами*/}
+                        dialogsPage={props.state.dialogsPage}
+                        addMessage={props.addMessage}
+                        updateNewMessageText={props.updateNewMessageText}
+                    />}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/profile'} render={() => <Profile
-                        state={props.state.profilePage}
+                        profilePage={props.state.profilePage}
                         addPost={props.addPost}
+                        updateNewPostText={props.updateNewPostText}
                     />}/> {/*применять при передаче компоненты c пропсами*/}
 
                     <Route path={'/news'} component={News}/>

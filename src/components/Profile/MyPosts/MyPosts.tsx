@@ -1,22 +1,33 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostsType} from "../../../App";
 
+export type PostsType = {
+    id: number
+    message: string
+    likesAmount: number
+}
 type MyPostsType = {
     posts: Array<PostsType>
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (newText: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
     let postsElements = props.posts.map(p => <Post message={p.message} likesAmount={p.likesAmount}/>)
 
-    let newPostElement: any = React.createRef();
+    let newPostElement = React.createRef<HTMLTextAreaElement>(); //ссылка на textarea
 
     let addPost = () => {
-        let text = newPostElement.current.value
-        props.addPost(text)
-        newPostElement.current.value = '';
+        props.addPost()
+    }
+
+    let onPostChange = () => {
+        if (newPostElement.current) {
+            let text = newPostElement.current.value;
+            props.updateNewPostText(text);
+        }
     }
 
     return (
@@ -24,7 +35,7 @@ const MyPosts = (props: MyPostsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
