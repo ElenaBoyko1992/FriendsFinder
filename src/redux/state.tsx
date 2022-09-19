@@ -1,11 +1,14 @@
-import {rerenderEntireTree} from "../render";
 import {PostsType} from "../components/Profile/MyPosts/MyPosts";
-import {DialogsPageType, DialogsType, MessagesType} from "../components/Dialogs/Dialogs";
+import {DialogsPageType, MessagesType} from "../components/Dialogs/Dialogs";
 import {ProfilePageType} from "../components/Profile/Profile";
 
 export type RootStateType = {
     dialogsPage: DialogsPageType
     profilePage: ProfilePageType
+}
+
+let rerenderEntireTree = (state: RootStateType) => {
+
 }
 
 let state: RootStateType = {
@@ -38,7 +41,7 @@ let state: RootStateType = {
     },
 }
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost: PostsType = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -46,14 +49,14 @@ export let addPost = () => {
     }
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = '';
-    rerenderEntireTree(state);
+    rerenderEntireTree(state)
 }
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
 
-export let addMessage = () => {
+export const addMessage = () => {
     let newMessage: MessagesType = {
         id: 3,
         message: state.dialogsPage.newMessageText
@@ -62,11 +65,13 @@ export let addMessage = () => {
     state.dialogsPage.newMessageText = ''
     rerenderEntireTree(state);
 }
-export let updateNewMessageText = (newText: string) => {
+export const updateNewMessageText = (newText: string) => {
     state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state)
-
 }
 
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer; //наблюдатель, паттерн observer
+}
 
 export default state
