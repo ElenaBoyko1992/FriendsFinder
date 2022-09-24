@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
 
 export type PostsType = {
     id: number
@@ -9,24 +10,22 @@ export type PostsType = {
 }
 type MyPostsType = {
     posts: Array<PostsType>
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
     let postsElements = props.posts.map(p => <Post message={p.message} likesAmount={p.likesAmount}/>)
-
     let newPostElement = React.createRef<HTMLTextAreaElement>(); //ссылка на textarea
 
     let addPost = () => {
-        props.addPost()
+        props.dispatch(addPostActionCreator())
     }
 
     let onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.updateNewPostText(text);
+            props.dispatch(updateNewPostTextActionCreator(text))
         }
     }
 

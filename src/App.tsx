@@ -8,7 +8,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
-import {addMessage, updateNewMessageText} from "./redux/state";
 
 
 type AppPropsType = {
@@ -16,10 +15,7 @@ type AppPropsType = {
         dialogsPage: DialogsPageType
         profilePage: ProfilePageType
     }
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -36,13 +32,11 @@ const App = (props: AppPropsType) => {
 
                     <Route path={'/dialogs'} render={() => <Dialogs
                         dialogsPage={props.state.dialogsPage}
-                        addMessage={props.addMessage}
-                        updateNewMessageText={props.updateNewMessageText}
+                        dispatch={props.dispatch}
                     />}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/profile'} render={() => <Profile
                         profilePage={props.state.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}
+                        dispatch={props.dispatch}
                     />}/> {/*применять при передаче компоненты c пропсами*/}
 
                     <Route path={'/news'} component={News}/>
