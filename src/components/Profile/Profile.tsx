@@ -1,6 +1,7 @@
 import React from 'react';
 import MyPosts, {PostsType} from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ActionsTypes} from "../../redux/state";
 
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -8,7 +9,7 @@ export type ProfilePageType = {
 }
 type ProfileType = {
     profilePage: ProfilePageType
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const Profile = (props: ProfileType) => {
