@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
-import {ActionsTypes, RootStateType} from "./redux/state";
+import {ActionsTypes, RootStateType} from "./redux/store";
 
 
 type AppPropsType = {
@@ -48,4 +48,3 @@ const App = (props: AppPropsType) => {
 
 export default App;
 
-//test
