@@ -1,5 +1,4 @@
-import {ActionsTypes} from "./store";
-import {DialogsPageType, MessagesType} from "../components/Dialogs/Dialogs";
+import {ActionsTypes, DialogsPageType, MessagesType} from "./store";
 
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';

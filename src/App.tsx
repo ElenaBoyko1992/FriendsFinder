@@ -3,17 +3,18 @@ import './App.css';
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
-import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {ActionsTypes, RootStateType} from "./redux/store";
 
 
 type AppPropsType = {
     state: RootStateType
     dispatch: (action: ActionsTypes) => void
+    store: any
 }
 
 const App = (props: AppPropsType) => {
@@ -28,13 +29,11 @@ const App = (props: AppPropsType) => {
                     {/* <Route path={'/dialogs'} component={Dialogs}/> применять при передаче компоненты без пропсов
                     <Route path={'/profile'} component={Profile}/> применять при передаче компоненты без пропсов*/}
 
-                    <Route path={'/dialogs'} render={() => <Dialogs
-                        dialogsPage={props.state.dialogsPage}
-                        dispatch={props.dispatch}
+                    <Route path={'/dialogs'} render={() => <DialogsContainer
+                        store={props.store}
                     />}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/profile'} render={() => <Profile
-                        profilePage={props.state.profilePage}
-                        dispatch={props.dispatch}
+                        store={props.store}
                     />}/> {/*применять при передаче компоненты c пропсами*/}
 
                     <Route path={'/news'} component={News}/>

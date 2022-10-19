@@ -1,9 +1,26 @@
 import {PostsType} from "../components/Profile/MyPosts/MyPosts";
-import {ProfilePageType} from "../components/Profile/Profile";
-import {DialogsPageType, MessagesType} from "../components/Dialogs/Dialogs";
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+
+type DialogsType = {
+    id: number
+    name: string
+}
+export type MessagesType = {
+    id: number
+    message: string
+}
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    newMessageBody: string
+}
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
 
 export type RootStateType = {
     dialogsPage: DialogsPageType

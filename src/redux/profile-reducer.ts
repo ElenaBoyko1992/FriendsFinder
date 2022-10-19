@@ -1,6 +1,6 @@
 import {ActionsTypes} from "./store";
 import {PostsType} from "../components/Profile/MyPosts/MyPosts";
-import {ProfilePageType} from "../components/Profile/Profile";
+import {ProfilePageType} from "../redux/store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
