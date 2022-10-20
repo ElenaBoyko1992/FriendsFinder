@@ -10,14 +10,7 @@ import Music from "./components/Music/Music";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {ActionsTypes, RootStateType} from "./redux/store";
 
-
-type AppPropsType = {
-    state: RootStateType
-    dispatch: (action: ActionsTypes) => void
-    store: any
-}
-
-const App = (props: AppPropsType) => {
+const App = () => {
 
     return (
         <BrowserRouter>
@@ -29,12 +22,10 @@ const App = (props: AppPropsType) => {
                     {/* <Route path={'/dialogs'} component={Dialogs}/> применять при передаче компоненты без пропсов
                     <Route path={'/profile'} component={Profile}/> применять при передаче компоненты без пропсов*/}
 
-                    <Route path={'/dialogs'} render={() => <DialogsContainer
-                        store={props.store}
-                    />}/> {/*применять при передаче компоненты c пропсами*/}
-                    <Route path={'/profile'} render={() => <Profile
-                        store={props.store}
-                    />}/> {/*применять при передаче компоненты c пропсами*/}
+                    <Route path={'/dialogs'}
+                           render={() => <DialogsContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
+                    <Route path={'/profile'}
+                           render={() => <Profile/>}/> {/*применять при передаче компоненты c пропсами*/}
 
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>

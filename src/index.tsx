@@ -5,11 +5,15 @@ import {RootStateType} from "./redux/store";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import StoreContext, {Provider} from "./StoreContext";
 
 
 let rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
-        <App state={state} dispatch={store.dispatch.bind(store)} store={store}/>,
+        //Provider пока можно не понимать
+        <Provider store={store}>
+            <App/>
+        </Provider>,
         document.getElementById('root')
     );
 };
