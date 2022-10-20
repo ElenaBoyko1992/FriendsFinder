@@ -2,12 +2,13 @@ import React, {ChangeEvent} from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import StoreContext from "../../StoreContext";
+import {StoreType} from "../../redux/store";
 
 const DialogsContainer = () => {
 
     return (
         <StoreContext.Consumer>{
-            (store: any) => {
+            (store: StoreType) => {
                 let state = store.getState().dialogsPage
 
                 let onSendMessageClick = () => {
