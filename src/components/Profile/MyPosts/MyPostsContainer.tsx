@@ -3,11 +3,12 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../red
 import MyPosts from "./MyPosts";
 import StoreContext from "../../../StoreContext";
 import {StoreType} from "../../../redux/store";
+import {ReduxStoreType} from "../../../redux/redux-store";
 
 const MyPostsContainer = () => {
     return (
         <StoreContext.Consumer>{
-            (store: StoreType) => {
+            (store: ReduxStoreType) => {
                 let state = store.getState();
 
                  let addPost = () => {

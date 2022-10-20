@@ -3,12 +3,13 @@ import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialo
 import Dialogs from "./Dialogs";
 import StoreContext from "../../StoreContext";
 import {StoreType} from "../../redux/store";
+import {ReduxStoreType} from "../../redux/redux-store";
 
 const DialogsContainer = () => {
 
     return (
         <StoreContext.Consumer>{
-            (store: StoreType) => {
+            (store: ReduxStoreType) => {
                 let state = store.getState().dialogsPage
 
                 let onSendMessageClick = () => {
