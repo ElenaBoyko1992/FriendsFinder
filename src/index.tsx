@@ -8,20 +8,20 @@ import App from './App';
 import {Provider} from "react-redux";
 
 
-let rerenderEntireTree = (state: RootStateType) => {
-    ReactDOM.render(
-        //Provider пока можно не понимать
-        <Provider store={store}>
-            <App/>
-        </Provider>,
-        document.getElementById('root')
-    );
+/*let rerenderEntireTree = (state: RootStateType) => {*/
+ReactDOM.render(
+    //Provider пока можно не понимать
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
+);
+/*
 };
-
-
 rerenderEntireTree(store.getState());
+*/
 
-store.subscribe(() => {
+/*store.subscribe(() => {
     let state = store.getState();
     rerenderEntireTree(state);
-})
+})*/ //для архива

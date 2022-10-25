@@ -12,23 +12,28 @@ let initialState = {
         {id: 2, message: 'Blabla', likesAmount: 11},
         {id: 2, message: 'Dada', likesAmount: 11},
     ],
-        newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com'
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPost: PostsType = {
                 id: 5,
                 message: state.newPostText,
                 likesAmount: 0
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.push(newPost);
+            stateCopy.newPostText = '';
+            return stateCopy;
+        }
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            let stateCopy = {...state};
+            //здесь глубокую копию posts можно не делать, т.к. здесь посты мы не меняем
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
         default:
             return state;
     }
