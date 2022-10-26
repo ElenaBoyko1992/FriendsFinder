@@ -8,6 +8,7 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users/Users";
 
 const App = () => {
 
@@ -25,10 +26,12 @@ const App = () => {
                            render={() => <DialogsContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/profile'}
                            render={() => <Profile/>}/> {/*применять при передаче компоненты c пропсами*/}
+                    <Route path={'/users'}
+                           render={() => <Users/>}/>
 
-                    <Route path={'/news'} component={News}/>
+                    {/*                    <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
-                    <Route path={'/settings'} component={Settings}/>
+                    <Route path={'/settings'} component={Settings}/>*/}
                 </div>
             </div>
         </BrowserRouter>

@@ -22,6 +22,10 @@ export type ProfilePageType = {
     newPostText: string
 }
 
+export type UsersStateType = {
+    users: Array<any>
+}
+
 export type RootStateType = {
     dialogsPage: DialogsPageType
     profilePage: ProfilePageType
