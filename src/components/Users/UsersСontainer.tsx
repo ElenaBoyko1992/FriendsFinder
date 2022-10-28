@@ -9,4 +9,5 @@ let mapStateToProps = (state: RootStateType) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+/*
+export default connect(mapStateToProps, mapDispatchToProps)(Users);*/
