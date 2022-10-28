@@ -2,6 +2,7 @@ import {PostsType} from "../components/Profile/MyPosts/MyPosts";
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {followAC, setUsersAC, unfollowAC} from "./users-reducer";
 
 type DialogsType = {
     id: number
@@ -22,14 +23,23 @@ export type ProfilePageType = {
     newPostText: string
 }
 
-export type UsersStateType = {
-    users: Array<any>
+export type UserType = {
+    id: number,
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location: { city: string, country: string }
+}
+
+export type UsersPageType = {
+    users: Array<UserType>
 }
 
 export type RootStateType = {
     dialogsPage: DialogsPageType
     profilePage: ProfilePageType
     sidebar: any
+    usersPage: UsersPageType
 }
 
 export type ActionsTypes =
@@ -37,6 +47,9 @@ export type ActionsTypes =
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
+    | ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
 
 export type StoreType = {
     _state: RootStateType
@@ -46,7 +59,7 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-let store: StoreType = {
+/*let store: StoreType = {
     _state: {
         dialogsPage: {
             dialogs: [
@@ -88,7 +101,7 @@ let store: StoreType = {
         this._callSubscriber = observer; //наблюдатель, паттерн observer
     },
 
-    /*    addPost() {
+    /!*    addPost() {
             let newPost: PostsType = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -114,7 +127,7 @@ let store: StoreType = {
         updateNewMessageText(newText: string) {
             this._state.dialogsPage.newMessageBody = newText;
             this._callSubscriber(this._state)
-        },*/
+        },*!/
 
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
@@ -123,7 +136,7 @@ let store: StoreType = {
 
         this._callSubscriber(this._state);
     }
-}
+}*/
 
-export default store;
+/*export default store;*/
 

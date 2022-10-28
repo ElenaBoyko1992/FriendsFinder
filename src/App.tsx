@@ -27,7 +27,7 @@ const App = () => {
                     <Route path={'/profile'}
                            render={() => <Profile/>}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/users'}
-                           render={() => <Users/>}/>
+                           render={() => <UsersContainer/>}/>
 
                     {/*                    <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
