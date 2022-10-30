@@ -1,18 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-
-export type PostsType = {
-    id: number
-    message: string
-    likesAmount: number
-}
-type MyPostsType = {
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-    posts: Array<PostsType>
-    newPostText: string
-}
+import {MyPostsType} from "./MyPostsContainer";
 
 const MyPosts = (props: MyPostsType) => {
     let postsElements = props.posts.map(p => <Post message={p.message} likesAmount={p.likesAmount}/>)

@@ -1,10 +1,18 @@
-import React, {ChangeEvent} from 'react';
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
+import React from 'react';
+import {DialogsPageType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
-import StoreContext from "../../StoreContext(архив)";
-import {ActionsTypes, RootStateType, StoreType} from "../../redux/store";
-import {ReduxStoreType} from "../../redux/redux-store";
 import {connect} from "react-redux";
+import {ReduxStoreType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
+
+type MapStatePropsType = {
+    dialogsPage: DialogsPageType
+}
+type mapDispatchPropsType = {
+    updateNewMessageBody: (body: string) => void
+    sendMessage: () => void
+}
+export type DialogsPropsType = MapStatePropsType & mapDispatchPropsType
 
 /*const DialogsContainer = () => {
 
@@ -32,12 +40,12 @@ import {connect} from "react-redux";
     )
 }*/ //для архива (создание контейнерной компоненты с данными из контекста без использования библиотеки React-Redux)
 
-let mapStateToProps = (state: RootStateType) => { //смысл данной функции замапить часть стейта на нужные нашей презентационной компоненте пропсы
+let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => { //смысл данной функции замапить часть стейта на нужные нашей презентационной компоненте пропсы
     return {
         dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch: any) => { //смысл данной функции замапить часть коллбэков из стора на нужные нашей презентационной компоненте пропсы
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => { //смысл данной функции замапить часть коллбэков из стора на нужные нашей презентационной компоненте пропсы
     return {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body));
@@ -49,6 +57,6 @@ let mapDispatchToProps = (dispatch: any) => { //смысл данной функ
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 export default DialogsContainer;

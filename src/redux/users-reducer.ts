@@ -1,19 +1,28 @@
-import {ActionsTypes} from "./store";
-import {PostsType} from "../components/Profile/MyPosts/MyPosts";
-import {ProfilePageType} from "../redux/store";
-import {UsersPageType, UserType} from "../components/Users/Users";
+import {ActionsTypes} from "./redux-store";
+
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
-//поправить типы юзеров в UsersStateType и тип action у reducer
+export type UserType = {
+    id: number,
+    photoUrl: string,
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location: { city: string, country: string }
+}
+
+export type UsersPageType = {
+    users: Array<UserType>
+}
 
 let initialState: UsersPageType = {
     users: [],
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes) => {
+const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
     switch (action.type) {
         case FOLLOW:
             return {

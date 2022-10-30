@@ -1,4 +1,19 @@
-import {ActionsTypes, DialogsPageType, MessagesType} from "./store";
+import {ActionsTypes} from "./redux-store";
+
+
+type DialogsType = {
+    id: number
+    name: string
+}
+type MessagesType = {
+    id: number
+    message: string
+}
+/*export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    newMessageBody: string
+}*/
 
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
@@ -11,18 +26,20 @@ let initialState = {
         {id: 4, name: 'Sasha'},
         {id: 5, name: 'Viktor'},
         {id: 6, name: 'Valera'},
-    ],
+    ] as Array<DialogsType>,
     messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'Yo'},
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'},
-    ],
+    ] as Array<MessagesType>,
     newMessageBody: '',
 }
 
-const dialogsReduser = (state: DialogsPageType = initialState, action: ActionsTypes) => {
+export type DialogsPageType = typeof initialState
+
+const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
     switch (action.type) {
         case SEND_MESSAGE:
             return {
@@ -45,4 +62,4 @@ export const updateNewMessageBodyCreator = (message: string) => {
     } as const
 }
 
-export default dialogsReduser;
+export default dialogsReducer;

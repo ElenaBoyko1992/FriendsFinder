@@ -1,52 +1,21 @@
-import {PostsType} from "../components/Profile/MyPosts/MyPosts";
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
-import {followAC, setUsersAC, unfollowAC} from "./users-reducer";
-import {UsersPageType} from "../components/Users/Users";
+import {followAC, setUsersAC, unfollowAC, UsersPageType} from "./users-reducer";
 
-type DialogsType = {
-    id: number
-    name: string
-}
-export type MessagesType = {
-    id: number
-    message: string
-}
-export type DialogsPageType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-    newMessageBody: string
-}
-
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
-}
-
-export type RootStateType = {
+/*export type RootStateType = {
     dialogsPage: DialogsPageType
     profilePage: ProfilePageType
     sidebar: any
     usersPage: UsersPageType
-}
+}*/
 
-export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof updateNewMessageBodyCreator>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-
-export type StoreType = {
+/*export type StoreType = {
     _state: RootStateType
     _callSubscriber: (state: RootStateType) => void
     getState: () => RootStateType
     subscribe: (observer: (state: RootStateType) => void) => void
     dispatch: (action: ActionsTypes) => void
-}
+}*/
 
 /*let store: StoreType = {
     _state: {

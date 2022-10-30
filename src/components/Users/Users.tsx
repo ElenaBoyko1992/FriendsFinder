@@ -1,24 +1,7 @@
 import React from "react";
 import s from './users.module.css'
-
-export type UserType = {
-    id: number,
-    photoUrl: string,
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: { city: string, country: string }
-}
-
-export type UsersPageType = {
-    users: Array<UserType>
-}
-type UsersPropsType = {
-    users: Array<UserType>
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: Array<UserType>) => void
-}
+import {UserType} from "../../redux/users-reducer";
+import {UsersPropsType} from "./UsersСontainer";
 
 let Users = (props: UsersPropsType) => {
     if (props.users.length === 0) {

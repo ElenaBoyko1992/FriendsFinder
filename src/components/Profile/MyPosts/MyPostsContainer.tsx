@@ -1,8 +1,22 @@
 import React from 'react';
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import {
+    addPostActionCreator,
+    ProfilePageType,
+    updateNewPostTextActionCreator
+} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import {RootStateType, StoreType} from "../../../redux/store";
 import {connect} from "react-redux";
+import {ReduxStoreType} from "../../../redux/redux-store";
+import {Dispatch} from "redux";
+
+type MapStatePropsType = ProfilePageType
+
+type mapDispatchPropsType = {
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+}
+
+export type MyPostsType = MapStatePropsType & mapDispatchPropsType
 
 /*const MyPostsContainer = () => {
     return (
@@ -28,14 +42,14 @@ import {connect} from "react-redux";
     )
 }*/ // (создание контейнерной компоненты с данными из контекста без использования библиотеки React-Redux)
 
-let mapStateToProps = (state: RootStateType) => {
+let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
     }
 }
 
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
         updateNewPostText: (text: string) => {
             dispatch(updateNewPostTextActionCreator(text));
