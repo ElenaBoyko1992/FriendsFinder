@@ -3,6 +3,7 @@ import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} fr
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {followAC, setUsersAC, unfollowAC} from "./users-reducer";
+import {UsersPageType} from "../components/Users/Users";
 
 type DialogsType = {
     id: number
@@ -21,18 +22,6 @@ export type DialogsPageType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
-}
-
-export type UserType = {
-    id: number,
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: { city: string, country: string }
-}
-
-export type UsersPageType = {
-    users: Array<UserType>
 }
 
 export type RootStateType = {

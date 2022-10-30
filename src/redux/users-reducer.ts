@@ -1,6 +1,7 @@
-import {ActionsTypes, UsersPageType, UserType} from "./store";
+import {ActionsTypes} from "./store";
 import {PostsType} from "../components/Profile/MyPosts/MyPosts";
 import {ProfilePageType} from "../redux/store";
+import {UsersPageType, UserType} from "../components/Users/Users";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -8,30 +9,8 @@ const SET_USERS = 'SET_USERS';
 
 //поправить типы юзеров в UsersStateType и тип action у reducer
 
-let initialState = {
-    users: [
-        /*        {
-                    id: 1,
-                    followed: false,
-                    fullName: 'Dmitry',
-                    status: 'I am a boss',
-                    location: {city: 'Minsk', country: 'Belarus'}
-                },
-                {
-                    id: 2,
-                    followed: true,
-                    fullName: 'Sasha',
-                    status: 'I am a boss too',
-                    location: {city: 'Moscow', country: 'Russia'}
-                },
-                {
-                    id: 3,
-                    followed: false,
-                    fullName: 'Andrew',
-                    status: 'I am a boss too',
-                    location: {city: 'Kiev', country: 'Ukraine'}
-                },*/
-    ],
+let initialState: UsersPageType = {
+    users: [],
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes) => {

@@ -19,5 +19,4 @@ const Post: React.FC<PostPropsType> = (props) => {
         </div>
     )
 }
-
 export default Post;
