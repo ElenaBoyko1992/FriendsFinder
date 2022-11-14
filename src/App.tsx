@@ -4,11 +4,7 @@ import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
-import News from "./components/News/News";
-import Settings from "./components/Settings/Settings";
-import Music from "./components/Music/Music";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import Users from "./components/Users/Users";
 import UsersContainer from "./components/Users/UsersСontainer";
 
 const App = () => {
