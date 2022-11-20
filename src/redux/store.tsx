@@ -1,6 +1,6 @@
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
-import {followAC, setUsersAC, unfollowAC, UsersPageType} from "./users-reducer";
+
 
 /*export type RootStateType = {
     dialogsPage: DialogsPageType
