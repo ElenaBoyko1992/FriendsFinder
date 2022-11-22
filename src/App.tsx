@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersСontainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App = () => {
 
@@ -22,7 +23,7 @@ const App = () => {
                     <Route path={'/dialogs'}
                            render={() => <DialogsContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/profile'}
-                           render={() => <Profile/>}/> {/*применять при передаче компоненты c пропсами*/}
+                           render={() => <ProfileContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/users'}
                            render={() => <UsersContainer/>}/>
 
