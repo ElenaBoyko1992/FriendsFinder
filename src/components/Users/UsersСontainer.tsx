@@ -36,6 +36,7 @@ export type UsersAPIComponentPropsType = MapStatePropsType & mapDispatchPropsTyp
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
 
     componentDidMount() {
+        debugger
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((response: any) => {
             this.props.toggleIsFetching(false)

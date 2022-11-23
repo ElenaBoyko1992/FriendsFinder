@@ -121,4 +121,16 @@ Preloader (кружочек загрузки)
 render={() => <DialogsContainer/>}/> - в path после '/dialogs' может стоять что угодно, не важно,
 компонента все равно отрисуется, главное, чтобы был /dialogs в адресной строке
 
+15/ 60 урок
+HOC WithRouter
+функция WithRouter аналог connect. Она также создает контейнерную компоненту и передаёт данные в виде пропсов из 
+контейнерной в презентационную компоненту, но в отличие от connect, данные она берет не из state, а с URL.
+
+Итого нашу изначальную презентационную компоненту Profile мы обернули еще в 3 контейнерных:
+1. ProfileContainer (для отправки запроса на сервер, делает "грязную" работу)
+2. Далее ProfileContainer обернули в WithUrlDataContainerComponent (передаем из WithUrlDataContainerComponent в ProfileContainer
+данные из URL)
+3. WithUrlDataContainerComponent обернули еще в одну контейнерную комп. с помощью connect для передачи в нее пропсов из state 
+
+
 !!!Поправить actionsType = у каждого редьюсера д.б. свой

@@ -22,7 +22,8 @@ const App = () => {
 
                     <Route path={'/dialogs'}
                            render={() => <DialogsContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
-                    <Route path={'/profile'}
+                    <Route path={'/profile/:userId?'} //указываем, что в адресе после profile может также прийти userId.
+                        //"?" указывает на то, что параметр :userId является опциональным
                            render={() => <ProfileContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/users'}
                            render={() => <UsersContainer/>}/>
