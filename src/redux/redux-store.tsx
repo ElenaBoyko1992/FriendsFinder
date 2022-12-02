@@ -37,3 +37,6 @@ export type ActionsTypes =
     | ReturnType<typeof setUserProfile>
 
 export default store;
+
+// @ts-ignore
+window.store = store

@@ -10,10 +10,19 @@ type PostsType = {
     message: string
     likesAmount: number
 }
+export type ProfileType = {
+    aboutMe: string
+    contacts: any
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: any
+    userId: number
+}
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
-    profile?: any
+    profile?: null | ProfileType
 }
 
 let initialState = {
@@ -62,7 +71,8 @@ export const updateNewPostTextActionCreator = (text: string) => {
         newText: text
     } as const
 }
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ProfileType) => {
+
     return {
         type: SET_USER_PROFILE,
         profile

@@ -24,3 +24,4 @@ rerenderEntireTree(store.getState());
     let state = store.getState();
     rerenderEntireTree(state);
 })*/ //для архива
+
