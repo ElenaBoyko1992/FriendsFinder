@@ -1,6 +1,3 @@
-import {ActionsTypes} from "./redux-store";
-
-
 type DialogsType = {
     id: number
     name: string
@@ -14,6 +11,12 @@ type MessagesType = {
     messages: Array<MessagesType>
     newMessageBody: string
 }*/
+
+
+export type ActionsTypes =
+
+    | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof updateNewMessageBodyCreator>
 
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';

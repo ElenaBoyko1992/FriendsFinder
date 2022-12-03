@@ -1,6 +1,3 @@
-import {ActionsTypes} from "./redux-store";
-
-
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -24,6 +21,15 @@ export type UsersPageType = {
     currentPage: number
     isFetching: boolean
 }
+
+export type ActionsTypes =
+
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
 
 let initialState: UsersPageType = {
     users: [],

@@ -1,6 +1,3 @@
-import {ActionsTypes} from "./redux-store";
-
-
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -24,6 +21,11 @@ export type ProfilePageType = {
     newPostText: string
     profile?: null | ProfileType
 }
+
+export type ActionsTypes =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof setUserProfile>
 
 let initialState = {
     posts: [

@@ -1,8 +1,7 @@
-import {ActionsTypes} from "./redux-store";
 
 let initialState = {};
 
-const sidebarReducer = (state: any = initialState, action: ActionsTypes) => {
+const sidebarReducer = (state: any = initialState, action: any) => {
 
     return state
 }
