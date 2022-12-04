@@ -2,8 +2,9 @@ import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import userPhoto from "../../assets/images/defaultAvatar.png";
+import {HeaderPropsType} from "./HeaderContainer";
 
-const Header = (props: any) => {
+const Header = (props: HeaderPropsType) => {
 
     return (
         <header className={s.header}>
@@ -14,7 +15,7 @@ const Header = (props: any) => {
             </div>
             <div className={s.loginBlock}>
                 {props.isAuth ? <div>{props.login}</div> : <NavLink to={'/login'}>Login</NavLink>}
-                <img src={props.avatar ? props.avatar : userPhoto} alt=""/>
+                <img src={props.userAvatar ? props.userAvatar : userPhoto} alt=""/>
             </div>
 
         </header>

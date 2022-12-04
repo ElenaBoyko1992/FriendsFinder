@@ -1,12 +1,10 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
+import {ProfileMapStatePropsType} from "../ProfileContainer";
 
-type PropfileInfoPropsType = {
-    profile: any
-}
 
-const ProfileInfo = (props: PropfileInfoPropsType) => {
+const ProfileInfo = (props: ProfileMapStatePropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
@@ -18,7 +16,7 @@ const ProfileInfo = (props: PropfileInfoPropsType) => {
                     alt=""/>*/}
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
+                <img src={props.profile.photos.large} alt={''}/>
                 <br/>
                 about me: {props.profile.aboutMe}
                 <br/>
