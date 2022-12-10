@@ -1,18 +1,12 @@
-import {combineReducers, createStore} from "redux";
-import profileReducer, {
-    addPostActionCreator, setUserProfile,
-    updateNewPostTextActionCreator
-} from "./profile-reducer";
-import dialogsReduser, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import profileReducer from "./profile-reducer";
+import dialogsReduser from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer, {
-    follow,
-    setCurrentPage,
-    setUsers,
-    setTotalUsersCount, toggleIsFetching,
-    unfollow
+
 } from "./users-reducer";
 import authReducer from "./auth-reducer";
+import thunkMiddleware from 'redux-thunk'
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -22,7 +16,7 @@ let rootReducer = combineReducers({
     auth: authReducer
 })
 
-let store = createStore(rootReducer);
+let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export type ReduxStoreType = ReturnType<typeof rootReducer>
 

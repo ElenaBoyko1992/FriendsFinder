@@ -1,3 +1,6 @@
+import {profileAPI, usersAPI} from "../api/api";
+import {setTotalUsersCount, setUsers, toggleIsFetching} from "./users-reducer";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -26,6 +29,8 @@ export type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof setUserProfile>
+
+type DispatchType = (action: ActionsTypes) => void
 
 let initialState = {
     posts: [
@@ -79,6 +84,15 @@ export const setUserProfile = (profile: ProfileType) => {
         type: SET_USER_PROFILE,
         profile
     } as const
+}
+
+export const getUserProfileDataTh = (userId: string) => {
+    return (dispatch: DispatchType) => {
+        profileAPI.getUserProfileData(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
 }
 
 export default profileReducer;

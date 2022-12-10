@@ -1,9 +1,8 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {setAuthUserData, setUserAvatar} from "../../redux/auth-reducer";
+import {checkAuthTh, setAuthUserData, setUserAvatar} from "../../redux/auth-reducer";
 import {ReduxStoreType} from "../../redux/redux-store";
-import {authAPI} from "../../api/api";
 
 
 type MapStatePropsType = {
@@ -12,8 +11,7 @@ type MapStatePropsType = {
     userAvatar: null | string
 }
 type MapDispatchPropsType = {
-    setAuthUserData: (userId: string, email: string, login: string) => void
-    setUserAvatar: (srcAddress: string) => void
+    checkAuthTh: () => void
 }
 
 export type HeaderPropsType = MapStatePropsType & MapDispatchPropsType
@@ -22,17 +20,7 @@ export type HeaderPropsType = MapStatePropsType & MapDispatchPropsType
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
-        authAPI.checkAuth()
-            .then((data: any) => {
-                if (data.resultCode === 0) {
-                    let {id, login, email} = data.data
-                    this.props.setAuthUserData(id, email, login)
-                    authAPI.getMyProfileData(id)
-                        .then(data => {
-                            this.props.setUserAvatar(data.photos.small);
-                        })
-                }
-            })
+        this.props.checkAuthTh()
     }
 
     render() {
@@ -49,4 +37,4 @@ const mapStateToProps = (state: ReduxStoreType): MapStatePropsType => ({
     userAvatar: state.auth.userAvatar
 });
 
-export default connect(mapStateToProps, {setAuthUserData, setUserAvatar})(HeaderContainer);
+export default connect(mapStateToProps, {checkAuthTh})(HeaderContainer);

@@ -1,3 +1,6 @@
+import {authAPI} from "../api/api";
+
+
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_AVATAR = 'SET_USER_AVATAR';
 
@@ -12,6 +15,8 @@ export type authReducerType = {
 export type ActionsTypes =
     ReturnType<typeof setAuthUserData>
     | ReturnType<typeof setUserAvatar>
+
+type DispatchType = (action: ActionsTypes) => void
 
 let initialState: authReducerType = {
     userId: null,
@@ -49,5 +54,21 @@ export const setUserAvatar = (srcAddress: string) => ({
     srcAddress
 }) as const
 
+export const checkAuthTh = () => {
+
+    return (dispatch: DispatchType) => {
+        authAPI.checkAuth()
+            .then((data: any) => {
+                if (data.resultCode === 0) {
+                    let {id, login, email} = data.data
+                    dispatch(setAuthUserData(id, email, login))
+                    authAPI.getMyProfileData(id)
+                        .then(data => {
+                            dispatch(setUserAvatar(data.photos.small))
+                        })
+                }
+            })
+    }
+}
 
 export default authReducer;
