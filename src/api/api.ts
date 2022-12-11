@@ -31,7 +31,7 @@ export const followingAPI = {
 }
 
 export const authAPI = {
-    checkAuth() {
+    me() {
         return instance.get(`auth/me`)
             .then((response: any) => response.data)
     },

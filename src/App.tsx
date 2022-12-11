@@ -6,6 +6,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersСontainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./components/Login/Login";
 
 const App = () => {
 
@@ -26,6 +27,8 @@ const App = () => {
                            render={() => <ProfileContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
                     <Route path={'/users'}
                            render={() => <UsersContainer/>}/>
+                    <Route path={'/login'}
+                           render={() => <LoginPage/>}/>
 
                     {/*                    <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>

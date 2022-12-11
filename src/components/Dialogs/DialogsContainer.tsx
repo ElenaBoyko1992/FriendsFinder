@@ -7,6 +7,7 @@ import {Dispatch} from "redux";
 
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
+    isAuth: boolean
 }
 type mapDispatchPropsType = {
     updateNewMessageBody: (body: string) => void
@@ -42,7 +43,8 @@ export type DialogsPropsType = MapStatePropsType & mapDispatchPropsType
 
 let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => { //смысл данной функции замапить часть стейта на нужные нашей презентационной компоненте пропсы
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => { //смысл данной функции замапить часть коллбэков из стора на нужные нашей презентационной компоненте пропсы

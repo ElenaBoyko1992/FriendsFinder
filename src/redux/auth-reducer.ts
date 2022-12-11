@@ -54,10 +54,10 @@ export const setUserAvatar = (srcAddress: string) => ({
     srcAddress
 }) as const
 
-export const checkAuthTh = () => {
+export const getAuthUserData = () => {
 
     return (dispatch: DispatchType) => {
-        authAPI.checkAuth()
+        authAPI.me()
             .then((data: any) => {
                 if (data.resultCode === 0) {
                     let {id, login, email} = data.data

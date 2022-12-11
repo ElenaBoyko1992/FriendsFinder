@@ -2,9 +2,13 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileMapStatePropsType} from "../ProfileContainer";
+import {ProfileType} from "../../../redux/profile-reducer";
 
+type ProfileInfoType = {
+    profile: ProfileType | null | undefined
+}
 
-const ProfileInfo = (props: ProfileMapStatePropsType) => {
+const ProfileInfo = (props: ProfileInfoType) => {
     if (!props.profile) {
         return <Preloader/>
     }
