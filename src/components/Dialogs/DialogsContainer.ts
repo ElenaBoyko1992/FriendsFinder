@@ -3,11 +3,12 @@ import {DialogsPageType, sendMessageCreator, updateNewMessageBodyCreator} from "
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {ReduxStoreType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
-    isAuth: boolean
 }
 type mapDispatchPropsType = {
     updateNewMessageBody: (body: string) => void
@@ -44,7 +45,6 @@ export type DialogsPropsType = MapStatePropsType & mapDispatchPropsType
 let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => { //смысл данной функции замапить часть стейта на нужные нашей презентационной компоненте пропсы
     return {
         dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => { //смысл данной функции замапить часть коллбэков из стора на нужные нашей презентационной компоненте пропсы
@@ -59,6 +59,12 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => { //см�
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+/*let AuthRedirectComponent = withAuthRedirect(Dialogs)
 
-export default DialogsContainer;
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+export default DialogsContainer*/
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect)(Dialogs)
+

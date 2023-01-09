@@ -10,6 +10,9 @@ import LoginPage from "./components/Login/Login";
 
 const App = () => {
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
