@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileMapStatePropsType} from "../ProfileContainer";
 import {ProfileType} from "../../../redux/profile-reducer";
+import ProfileStatus from "./ProfileStatus";
 
 type ProfileInfoType = {
     profile: ProfileType | null | undefined
@@ -26,7 +27,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <br/>
                 contacts: {props.profile.contacts.twitter}
                 <br/>
-                ava + description
+                <ProfileStatus status={'Hello my friends!'}/>
             </div>
         </div>
     )
