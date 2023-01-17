@@ -7,6 +7,8 @@ import ProfileStatus from "./ProfileStatus";
 
 type ProfileInfoType = {
     profile: ProfileType | null | undefined
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
@@ -27,7 +29,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <br/>
                 contacts: {props.profile.contacts.twitter}
                 <br/>
-                <ProfileStatus status={'Hello my friends!'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )

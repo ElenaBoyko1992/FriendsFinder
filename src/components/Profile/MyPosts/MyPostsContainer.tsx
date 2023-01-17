@@ -46,6 +46,7 @@ let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
+        status: state.profilePage.status
     }
 }
 
