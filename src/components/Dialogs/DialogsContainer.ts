@@ -1,5 +1,5 @@
 import React from 'react';
-import {DialogsPageType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
+import {DialogsPageType, sendMessageCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {ReduxStoreType} from "../../redux/redux-store";
@@ -11,8 +11,7 @@ type MapStatePropsType = {
     dialogsPage: DialogsPageType
 }
 type mapDispatchPropsType = {
-    updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
+    sendMessage: (newMessageBody: string) => void
 }
 export type DialogsPropsType = MapStatePropsType & mapDispatchPropsType
 
@@ -49,12 +48,8 @@ let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => { //смыс
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => { //смысл данной функции замапить часть коллбэков из стора на нужные нашей презентационной компоненте пропсы
     return {
-        updateNewMessageBody: (body: string) => {
-            dispatch(updateNewMessageBodyCreator(body));
-
-        },
-        sendMessage: () => {
-            dispatch(sendMessageCreator());
+        sendMessage: (newMessageBody: string) => {
+            dispatch(sendMessageCreator(newMessageBody));
         },
     }
 }

@@ -22,14 +22,12 @@ export type ProfileType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
     profile?: null | ProfileType
     status: string
 }
 
 export type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
@@ -42,7 +40,6 @@ let initialState = {
         {id: 2, message: 'Blabla', likesAmount: 11},
         {id: 2, message: 'Dada', likesAmount: 11},
     ],
-    newPostText: 'it-kamasutra.com',
     profile: null,
     status: ''
 }
@@ -52,21 +49,14 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
         case ADD_POST: {
             let newPost: PostsType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPost,
                 likesAmount: 0
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
+                posts: [...state.posts, newPost]
             };
         }
-        case UPDATE_NEW_POST_TEXT:
-            //здесь глубокую копию posts можно не делать, т.к. здесь посты мы не меняем
-            return {
-                ...state,
-                newPostText: action.newText
-            };
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
         case SET_STATUS:
@@ -80,13 +70,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}) as const
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    } as const
-}
+export const addPostActionCreator = (newPost: string) => ({type: ADD_POST, newPost}) as const
+
 export const setUserProfile = (profile: ProfileType) => {
 
     return {
