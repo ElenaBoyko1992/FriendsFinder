@@ -12,16 +12,18 @@ import Dialogs from "../Dialogs/Dialogs";
 export type  ProfileMapStatePropsType = {
     profile: null | undefined | ProfileType
     status: string
+    autorizedUserId: string
+    isAuth: boolean
 }
 type  MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
-    getStatus: (userId: string) => void
+    getStatus: (userId: string | undefined) => void
     updateStatus: (status: string) => void
 }
 type ProfileContainerPropsType = ProfileMapStatePropsType & MapDispatchPropsType
 
 type DataFromWithRouterType = {
-    userId?: string | undefined
+    userId?: string
 }
 export type PropsType = RouteComponentProps<DataFromWithRouterType> & ProfileContainerPropsType
 
@@ -33,7 +35,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2'
+            userId = this.props.autorizedUserId
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -50,7 +52,10 @@ class ProfileContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: ReduxStoreType): ProfileMapStatePropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    autorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
+
 })
 
 export default compose<React.ComponentType>(

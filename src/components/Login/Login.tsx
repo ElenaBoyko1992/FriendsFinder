@@ -2,16 +2,32 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
+import {ReduxStoreType} from "../../redux/redux-store";
+import style from '../common/FormsControls/FormsControls.module.css'
+
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
-
-const Login = () => {
+type LoginPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
+}
+type MapStatePropsType = {
+    isAuth: boolean
+}
+const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.login(formData.email, formData.password, formData.rememberMe)
+    }
+
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
 
     return (
@@ -25,19 +41,24 @@ const Login = () => {
 };
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
+    console.log(props.error)
         return (
             <form onSubmit={props.handleSubmit}>
                 <div>
-                    <Field placeholder={'Login'} component={Input} name={'login'}
+                    <Field placeholder={'Email'} component={Input} name={'email'}
                            validate={[required]}/>
                 </div>
                 <div>
-                    <Field placeholder={'Password'} component={Input} name={'password'}
+                    <Field placeholder={'Password'} component={Input} name={'password'} type={'password'}
                            validate={[required]}/>
                 </div>
                 <div>
                     <Field component={Input} type={'checkbox'} name={'rememberMe'}/> remember me
                 </div>
+                {props.error && <div className={style.formSummaryError}>
+                    {props.error}
+                </div>}
                 <div>
                     <button>Login</button>
                 </div>
@@ -51,4 +72,7 @@ const LoginReduxForm = reduxForm<FormDataType>({
     form: 'login'
 })(LoginForm)
 
-export default Login;
+const mapStateToProps = (state: ReduxStoreType): MapStatePropsType => ({
+    isAuth: state.auth.isAuth
+})
+export default connect(mapStateToProps, {login})(Login);

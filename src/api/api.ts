@@ -35,11 +35,24 @@ export const authAPI = {
         return instance.get(`auth/me`)
             .then((response: any) => response.data)
     },
-    getMyProfileData(myId: number) {
-
-        return axios.get(`profile/${myId}`)
+    // getMyProfileData(myId: number) {
+    //     debugger
+    //     return axios.get(`profile/${myId}`)
+    //         .then((response: any) => {
+    //             debugger
+    //             return response.data
+    //         })
+    // },
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
             .then((response: any) => response.data)
-    }
+    },
+    logout() {
+        return instance.delete(`auth/login`)
+            .then((response: any) => response.data)
+    },
+
+
 }
 
 export const profileAPI = {

@@ -1,4 +1,6 @@
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
+import {Dispatch} from "redux";
 
 
 const SET_USER_DATA = 'SET_USER_DATA';
@@ -16,7 +18,6 @@ export type ActionsTypes =
     ReturnType<typeof setAuthUserData>
     | ReturnType<typeof setUserAvatar>
 
-type DispatchType = (action: ActionsTypes) => void
 
 let initialState: authReducerType = {
     userId: null,
@@ -31,8 +32,7 @@ const authReducer = (state = initialState, action: ActionsTypes): authReducerTyp
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
         case SET_USER_AVATAR:
             return {
@@ -45,9 +45,9 @@ const authReducer = (state = initialState, action: ActionsTypes): authReducerTyp
     }
 }
 
-export const setAuthUserData = (userId: string, email: string, login: string) => ({
+export const setAuthUserData = (userId: string | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {userId, email, login}
+    payload: {userId, email, login, isAuth}
 }) as const
 export const setUserAvatar = (srcAddress: string) => ({
     type: SET_USER_AVATAR,
@@ -56,16 +56,46 @@ export const setUserAvatar = (srcAddress: string) => ({
 
 export const getAuthUserData = () => {
 
-    return (dispatch: DispatchType) => {
+    return (dispatch: Dispatch) => {
         authAPI.me()
             .then((data: any) => {
                 if (data.resultCode === 0) {
-                    let {id, login, email} = data.data
-                    dispatch(setAuthUserData(id, email, login))
-                    authAPI.getMyProfileData(id)
-                        .then(data => {
-                            dispatch(setUserAvatar(data.photos.small))
-                        })
+                    let {email, id, login} = data.data
+                    console.log(email)
+                    dispatch(setAuthUserData(id, email, login, true))
+                    /*                    authAPI.getMyProfileData(data.data.id)
+                                            .then(data => {
+                                                debugger
+                                                dispatch(setUserAvatar(data.photos.small))
+                                            })*/
+                }
+            })
+    }
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => {
+
+    return (dispatch: any) => {
+        authAPI.login(email, password, rememberMe)
+            .then((data: any) => {
+                if (data.resultCode === 0) {
+                    dispatch(getAuthUserData())
+                } else {
+                    let message = data.messages.length > 0 ? data.messages[0] : 'Some error';
+                    dispatch(stopSubmit('login', {_error: message}))
+                }
+            })
+    }
+}
+
+export const logout = () => {
+
+    return (dispatch: any) => {
+        authAPI.logout()
+            .then((data: any) => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData(null, null, null, false))
+
                 }
             })
     }
