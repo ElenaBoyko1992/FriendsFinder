@@ -12,7 +12,7 @@ import Dialogs from "../Dialogs/Dialogs";
 export type  ProfileMapStatePropsType = {
     profile: null | undefined | ProfileType
     status: string
-    autorizedUserId: string
+    autorizedUserId: any
     isAuth: boolean
 }
 type  MapDispatchPropsType = {
@@ -35,10 +35,13 @@ class ProfileContainer extends React.Component<PropsType> {
 
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = this.props.autorizedUserId
+                userId = this.props.autorizedUserId
         }
-        this.props.getUserProfile(userId)
-        this.props.getStatus(userId)
+        if(userId){
+            this.props.getUserProfile(userId)
+            this.props.getStatus(userId)
+        }
+
     }
 
     render() {
