@@ -93,7 +93,6 @@ let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
 
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
     connect(mapStateToProps, {
         setCurrentPage, getUsers, follow, unfollow
     })

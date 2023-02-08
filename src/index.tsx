@@ -3,15 +3,19 @@ import './index.css';
 import store from "./redux/redux-store";
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from "../src/App";
 import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 
 
 /*let rerenderEntireTree = (state: RootStateType) => {*/
+
 ReactDOM.render(
     //Provider пока можно не понимать
     <Provider store={store}>
-        <App/>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );

@@ -57,7 +57,7 @@ export const setUserAvatar = (srcAddress: string) => ({
 export const getAuthUserData = () => {
 
     return (dispatch: Dispatch) => {
-        authAPI.me()
+       return authAPI.me()
             .then((data: any) => {
                 if (data.resultCode === 0) {
                     let {email, id, login} = data.data
