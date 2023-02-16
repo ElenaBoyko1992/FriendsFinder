@@ -332,3 +332,7 @@ return state.usersPage.users
 export const getUsers = createSelector(getUsersSelector, (users: Array<UserType>) => {
 return users.filter(u => true)
 })
+
+35/ 84 урок - Хуки
+
+Хук - это функция

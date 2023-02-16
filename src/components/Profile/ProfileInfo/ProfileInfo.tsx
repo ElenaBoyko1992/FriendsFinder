@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import {ProfileMapStatePropsType} from "../ProfileContainer";
 import {ProfileType} from "../../../redux/profile-reducer";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 type ProfileInfoType = {
     profile: ProfileType | null | undefined
@@ -29,7 +30,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
                 <br/>
                 contacts: {props.profile.contacts.twitter}
                 <br/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )
