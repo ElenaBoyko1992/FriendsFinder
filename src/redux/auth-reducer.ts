@@ -1,23 +1,11 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {Dispatch} from "redux";
+import {AppThunkDispatch} from "./redux-store";
 
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_AVATAR = 'SET_USER_AVATAR';
-
-export type authReducerType = {
-    userId: null | string
-    email: null | string
-    login: null | string
-    isAuth: boolean
-    userAvatar: null | string
-}
-
-export type ActionsTypes =
-    ReturnType<typeof setAuthUserData>
-    | ReturnType<typeof setUserAvatar>
-
 
 let initialState: authReducerType = {
     userId: null,
@@ -27,7 +15,7 @@ let initialState: authReducerType = {
     userAvatar: null
 }
 
-const authReducer = (state = initialState, action: ActionsTypes): authReducerType => {
+const authReducer = (state = initialState, action: AuthActionsTypes): authReducerType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -45,6 +33,7 @@ const authReducer = (state = initialState, action: ActionsTypes): authReducerTyp
     }
 }
 
+//AC
 export const setAuthUserData = (userId: string | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
     payload: {userId, email, login, isAuth}
@@ -54,9 +43,8 @@ export const setUserAvatar = (srcAddress: string) => ({
     srcAddress
 }) as const
 
-export const getAuthUserData = () => {
-
-    return (dispatch: Dispatch) => {
+//thunks
+export const getAuthUserData = () => (dispatch: AppThunkDispatch) => {
        return authAPI.me()
             .then((data: any) => {
                 if (data.resultCode === 0) {
@@ -70,12 +58,10 @@ export const getAuthUserData = () => {
                                             })*/
                 }
             })
-    }
+
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => {
-
-    return (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: AppThunkDispatch) => {
         authAPI.login(email, password, rememberMe)
             .then((data: any) => {
                 if (data.resultCode === 0) {
@@ -85,12 +71,10 @@ export const login = (email: string, password: string, rememberMe: boolean) => {
                     dispatch(stopSubmit('login', {_error: message}))
                 }
             })
-    }
+
 }
 
-export const logout = () => {
-
-    return (dispatch: any) => {
+export const logout = () =>  (dispatch: AppThunkDispatch) => {
         authAPI.logout()
             .then((data: any) => {
                 if (data.resultCode === 0) {
@@ -98,7 +82,20 @@ export const logout = () => {
 
                 }
             })
-    }
+
 }
+
+//types
+export type authReducerType = {
+    userId: null | string
+    email: null | string
+    login: null | string
+    isAuth: boolean
+    userAvatar: null | string
+}
+
+export type AuthActionsTypes =
+    ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof setUserAvatar>
 
 export default authReducer;

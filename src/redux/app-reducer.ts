@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {getAuthUserData} from "./auth-reducer";
+import {AppThunkDispatch} from "./redux-store";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
@@ -7,7 +8,7 @@ let initialState: appReducerType = {
     initialized: false
 }
 
-const appReducer = (state = initialState, action: ActionsTypes): appReducerType => {
+const appReducer = (state = initialState, action: AppActionsTypes): appReducerType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -26,9 +27,9 @@ export const initializedSuccess = () => ({
 }) as const
 
 //thunks
-export const initializeApp = () => (dispatch: any) => {
+export const initializeApp = () => (dispatch: AppThunkDispatch) => {
     dispatch(getAuthUserData())
-        .then(()=>{
+        .then(() => {
             dispatch(initializedSuccess())
         })
 
@@ -38,7 +39,7 @@ export const initializeApp = () => (dispatch: any) => {
 export type appReducerType = {
     initialized: boolean
 }
-export type ActionsTypes =
+export type AppActionsTypes =
     ReturnType<typeof initializedSuccess>
 
 

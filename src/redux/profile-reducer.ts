@@ -1,37 +1,9 @@
 import {profileAPI, usersAPI} from "../api/api";
-import {setTotalUsersCount, setUsers, toggleIsFetching} from "./users-reducer";
+import {AppThunkDispatch} from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET_STATUS';
-
-type PostsType = {
-    id: number
-    message: string
-    likesAmount: number
-}
-export type ProfileType = {
-    aboutMe: string
-    contacts: any
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    photos: any
-    userId: number
-}
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    profile?: null | ProfileType
-    status: string
-}
-
-export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setStatus>
-
-type DispatchType = (action: ActionsTypes) => void
 
 let initialState = {
     posts: [
@@ -44,7 +16,7 @@ let initialState = {
     status: ''
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes): ProfilePageType => {
     switch (action.type) {
         case ADD_POST: {
             let newPost: PostsType = {
@@ -70,6 +42,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 
 }
 
+//AC
 export const addPostActionCreator = (newPost: string) => ({type: ADD_POST, newPost}) as const
 
 export const setUserProfile = (profile: ProfileType) => {
@@ -86,30 +59,52 @@ export const setStatus = (status: string) => {
     } as const
 }
 
-export const getUserProfile = (userId: string) => {
-    return (dispatch: DispatchType) => {
+//thunks
+export const getUserProfile = (userId: string) =>  (dispatch: AppThunkDispatch) => {
         profileAPI.getUserProfileData(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data))
             })
-    }
 }
 
-export const getStatus = (userId: string) => {
-    return (dispatch: DispatchType) => {
+export const getStatus = (userId: string) =>  (dispatch: AppThunkDispatch) => {
         profileAPI.getStatus(userId)
             .then(res => dispatch(setStatus(res.data)))
-    }
+
 }
-export const updateStatus = (status: string) => {
-    return (dispatch: DispatchType) => {
+export const updateStatus = (status: string) =>  (dispatch: AppThunkDispatch) => {
         profileAPI.updateStatus(status)
             .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(setStatus(status))
                 }
             })
-    }
 }
+
+//types
+type PostsType = {
+    id: number
+    message: string
+    likesAmount: number
+}
+export type ProfileType = {
+    aboutMe: string
+    contacts: any
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: any
+    userId: number
+}
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    profile?: null | ProfileType
+    status: string
+}
+
+export type ProfileActionsTypes =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
 
 export default profileReducer;

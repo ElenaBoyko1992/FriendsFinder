@@ -1,21 +1,3 @@
-type DialogsType = {
-    id: number
-    name: string
-}
-type MessagesType = {
-    id: number
-    message: string
-}
-/*export type DialogsPageType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-    newMessageBody: string
-}*/
-
-
-export type ActionsTypes =
-    | ReturnType<typeof sendMessageCreator>
-
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
@@ -36,8 +18,6 @@ let initialState = {
     ] as Array<MessagesType>
 }
 
-export type DialogsPageType = typeof initialState
-
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
     switch (action.type) {
         case SEND_MESSAGE:
@@ -50,6 +30,21 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
     }
 }
 
+//AC
 export const sendMessageCreator = (newMessageBody: string) => ({type: SEND_MESSAGE, newMessageBody}) as const
+
+//types
+type DialogsType = {
+    id: number
+    name: string
+}
+type MessagesType = {
+    id: number
+    message: string
+}
+export type ActionsTypes =
+    | ReturnType<typeof sendMessageCreator>
+export type DialogsPageType = typeof initialState
+
 
 export default dialogsReducer;
