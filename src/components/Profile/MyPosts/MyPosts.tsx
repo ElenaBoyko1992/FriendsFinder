@@ -6,7 +6,8 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
-const MyPosts = (props: MyPostsType) => {
+const MyPosts = React.memo((props: MyPostsType) => {
+    console.log('MyPosts')
     let postsElements = props.posts.map(p => <Post message={p.message} likesAmount={p.likesAmount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>(); //ссылка на textarea
 
@@ -34,7 +35,7 @@ const MyPosts = (props: MyPostsType) => {
             </div>
         </div>
     )
-}
+})
 
 const maxLength10 = maxLengthCreator(10);
 
