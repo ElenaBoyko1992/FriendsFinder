@@ -1,9 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-import {ProfileMapStatePropsType} from "../ProfileContainer";
 import {ProfileType} from "../../../redux/profile-reducer";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 type ProfileInfoType = {
@@ -12,25 +10,20 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
 }
 
-const ProfileInfo = (props: ProfileInfoType) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoType) => {
+    if (!profile) {
         return <Preloader/>
     }
     return (
         <div>
-            <div>
-                {/*                <img
-                    src="https://atlantis-cms-assets.s3.us-east-2.amazonaws.com/styled/be395bb860f928a4764100c82e91951f"
-                    alt=""/>*/}
-            </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large} alt={''}/>
+                <img src={profile.photos.large} alt={''}/>
                 <br/>
-                about me: {props.profile.aboutMe}
+                about me: {profile.aboutMe}
                 <br/>
-                contacts: {props.profile.contacts.twitter}
+                contacts: {profile.contacts.twitter}
                 <br/>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )

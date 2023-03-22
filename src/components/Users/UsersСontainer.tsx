@@ -39,11 +39,13 @@ export type UsersAPIComponentPropsType = MapStatePropsType & mapDispatchPropsTyp
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {requestUsers, currentPage, pageSize} = this.props
+        requestUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        const {requestUsers, pageSize} = this.props
+        requestUsers(pageNumber, pageSize)
     }
 
     render() {
@@ -62,17 +64,6 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
         </>
     }
 }
-
-/*let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-}*/
 
 let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
     return {
