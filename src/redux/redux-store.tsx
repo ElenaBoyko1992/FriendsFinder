@@ -1,11 +1,11 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {ProfileActionsTypes} from "./profile-reducer";
-import dialogsReduser from "./dialogs-reducer";
+import dialogsReduser, {DialogsActionsTypes} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer, {UsersActionsTypes} from "./users-reducer";
 import authReducer, {AuthActionsTypes} from "./auth-reducer";
 import thunkMiddleware, {ThunkDispatch} from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form'
+import {reducer as formReducer} from 'redux-form'
 import appReducer, {AppActionsTypes} from "./app-reducer";
 
 
@@ -27,7 +27,12 @@ export type ReduxStoreType = ReturnType<typeof rootReducer>
 export type AppThunkDispatch = ThunkDispatch<ReduxStoreType, any, AppActionsType>
 
 //все типы экшенов для всего app
-export type AppActionsType = AppActionsTypes | AuthActionsTypes | ProfileActionsTypes | UsersActionsTypes
+export type AppActionsType =
+    AppActionsTypes
+    | AuthActionsTypes
+    | ProfileActionsTypes
+    | UsersActionsTypes
+    | DialogsActionsTypes
 
 export default store;
 

@@ -11,12 +11,11 @@ import {BrowserRouter} from "react-router-dom";
 /*let rerenderEntireTree = (state: RootStateType) => {*/
 
 ReactDOM.render(
-    //Provider пока можно не понимать
-    <Provider store={store}>
-        <BrowserRouter>
+    <BrowserRouter>
+        <Provider store={store}>
             <App/>
-        </BrowserRouter>
-    </Provider>,
+        </Provider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
 /*

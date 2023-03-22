@@ -18,7 +18,7 @@ let initialState = {
     ] as Array<MessagesType>
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsTypes): DialogsPageType => {
     switch (action.type) {
         case SEND_MESSAGE:
             return {
@@ -42,7 +42,7 @@ type MessagesType = {
     id: number
     message: string
 }
-export type ActionsTypes =
+export type DialogsActionsTypes =
     | ReturnType<typeof sendMessageCreator>
 export type DialogsPageType = typeof initialState
 

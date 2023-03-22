@@ -70,25 +70,23 @@ export const deletePost = (postId: number) => {
 
 
 //thunks
-export const getUserProfile = (userId: string) => (dispatch: AppThunkDispatch) => {
-    profileAPI.getUserProfileData(userId)
-        .then(response => {
-            dispatch(setUserProfile(response.data))
-        })
+export const getUserProfile = (userId: string) => async (dispatch: AppThunkDispatch) => {
+    let response = await profileAPI.getUserProfileData(userId)
+
+    dispatch(setUserProfile(response.data))
 }
 
-export const getStatus = (userId: string) => (dispatch: AppThunkDispatch) => {
-    profileAPI.getStatus(userId)
-        .then(res => dispatch(setStatus(res.data)))
+export const getStatus = (userId: string) => async (dispatch: AppThunkDispatch) => {
+    let res = await profileAPI.getStatus(userId)
 
+    dispatch(setStatus(res.data))
 }
-export const updateStatus = (status: string) => (dispatch: AppThunkDispatch) => {
-    profileAPI.updateStatus(status)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setStatus(status))
-            }
-        })
+export const updateStatus = (status: string) => async (dispatch: AppThunkDispatch) => {
+    let res = await profileAPI.updateStatus(status)
+
+    if (res.data.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
 }
 
 //types
