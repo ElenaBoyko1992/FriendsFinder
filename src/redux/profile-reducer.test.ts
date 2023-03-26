@@ -1,4 +1,4 @@
-import profileReducer, {addPostActionCreator, deletePost} from "./profile-reducer";
+import profileReducer, {addPostActionCreator, deletePost, setStatus, setUserProfile} from "./profile-reducer";
 
 const startState = {
     posts: [
@@ -12,7 +12,6 @@ const startState = {
 };
 
 test('post should be added', () => {
-
 
     const endState = profileReducer(startState, addPostActionCreator('бла-бла'))
 
@@ -35,4 +34,29 @@ test('after deleting length of messages shouldn`t be decrement if id is incorrec
 
     expect(endState.posts.length).toBe(4);
 
+});
+
+test('profile must be setted', () => {
+    const profile = {
+        aboutMe: 'i am...',
+        contacts: '8-903...',
+        fullName: 'Elena',
+        lookingForAJob: true,
+        lookingForAJobDescription: '',
+        photos: null,
+        userId: 569
+    }
+    const endState = profileReducer(startState, setUserProfile(profile))
+
+    expect(endState.profile).toBeTruthy();
+    expect(endState.profile?.aboutMe).toBe('i am...');
+});
+
+test('status must be setted', () => {
+
+    const endState = setStatus('Hey!')
+
+    expect(endState.status).toBeTruthy();
+    expect(endState.status).toBe('Hey!');
+    expect(endState.status.length).toBe(4);
 });
