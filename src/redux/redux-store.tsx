@@ -1,11 +1,11 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer, {ProfileActionsTypes} from "./profile-reducer";
 import dialogsReduser, {DialogsActionsTypes} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer, {UsersActionsTypes} from "./users-reducer";
 import authReducer, {AuthActionsTypes} from "./auth-reducer";
 import thunkMiddleware, {ThunkDispatch} from 'redux-thunk';
-import {reducer as formReducer} from 'redux-form'
+import {reducer, reducer as formReducer} from 'redux-form'
 import appReducer, {AppActionsTypes} from "./app-reducer";
 
 
@@ -19,7 +19,13 @@ let rootReducer = combineReducers({
     app: appReducer
 })
 
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+//создание стора с Редакс + настройка браузерного расширения "ReduxDevTools"
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+
+//классическое создание стора с Редакс
+//let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export type ReduxStoreType = ReturnType<typeof rootReducer>
 
