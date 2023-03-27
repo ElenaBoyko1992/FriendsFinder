@@ -2,13 +2,13 @@ import {followingAPI, usersAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 import {updateObjectInArray} from "../utils/object-helpers";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+const FOLLOW = 'samurai-network/users/FOLLOW';
+const UNFOLLOW = 'samurai-network/users/UNFOLLOW';
+const SET_USERS = 'samurai-network/users/SET_USERS';
+const SET_CURRENT_PAGE = 'samurai-network/users/SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'samurai-network/users/SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'samurai-network/users/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'samurai-network/users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState: UsersPageType = {
     users: [],
@@ -44,7 +44,7 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersActionsT
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         default:
             return state;
@@ -83,7 +83,7 @@ export const requestUsers = (page: number, pageSize: number) => async (dispatch:
 const followUnfollowFlow = async (dispatch: AppThunkDispatch, userId: number, apiMethod: typeof followingAPI.follow | typeof followingAPI.unfollow, actionCreator: typeof followSuccess | typeof unfollowSuccess) => {
     dispatch(toggleFollowingProgress(true, userId))
     let response = await apiMethod(userId)
-    if (response.resultCode == 0) {
+    if (response.resultCode === 0) {
         dispatch(actionCreator(userId))
     }
     dispatch(toggleFollowingProgress(false, userId))

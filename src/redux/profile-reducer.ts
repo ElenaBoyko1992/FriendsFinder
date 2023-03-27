@@ -1,10 +1,10 @@
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET-USER-PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const DELETE_POST = 'DELETE_POST';
+const ADD_POST = 'samurai-network/profile/ADD-POST';
+const SET_USER_PROFILE = 'samurai-network/profile/SET-USER-PROFILE';
+const SET_STATUS = 'samurai-network/profile/SET_STATUS';
+const DELETE_POST = 'samurai-network/profile/DELETE_POST';
 
 let initialState = {
     posts: [
@@ -40,7 +40,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         case DELETE_POST:
             return {
                 ...state,
-                posts: state.posts.filter(p => p.id != action.postId)
+                posts: state.posts.filter(p => p.id !== action.postId)
             }
         default:
             return state;

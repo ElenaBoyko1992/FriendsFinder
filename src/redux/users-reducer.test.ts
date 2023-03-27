@@ -1,4 +1,9 @@
-import usersReducer, {followSuccess} from "./users-reducer";
+import usersReducer, {
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers, toggleFollowingProgress,
+    toggleIsFetching
+} from "./users-reducer";
 
 const state = {
     users: [],
@@ -9,10 +14,62 @@ const state = {
     followingInProgress: []
 };
 
-test('must be FOLLOW', () => {
-    const endState = usersReducer(state, followSuccess(236))
+test('users must be set', () => {
+    const users = [
+        {
+            id: 1,
+            photos: {small: undefined, large: undefined},
+            followed: true,
+            name: 'John',
+            status: 'free',
+            location: {city: 'Moscow', country: 'Russia'}
+        },
+        {
+            id: 2,
+            photos: {small: undefined, large: undefined},
+            followed: false,
+            name: 'Kate',
+            status: 'hello',
+            location: {city: 'Moscow', country: 'Russia'}
+        }
+    ]
 
-    expect(endState.users.length).toBe(1);
-    expect(endState.users[0].id).toBe(236);
-    expect(endState.users[0].followed).toBe(true);
+    const endState = usersReducer(state, setUsers(users))
+
+    expect(endState.users.length).toBe(2);
+    expect(endState.users[0].name).toBe('John');
+    expect(endState.users[1].followed).toBeFalsy();
+});
+
+test('current page must be set', () => {
+
+    const endState = usersReducer(state, setCurrentPage(12))
+
+    expect(endState.currentPage).toBe(12);
+
+});
+
+test('total user count must be set', () => {
+
+    const endState = usersReducer(state, setTotalUsersCount(10))
+
+    expect(endState.totalUsersCount).toBe(10);
+
+});
+
+test('isFetching must be changed', () => {
+
+    const endState = usersReducer(state, toggleIsFetching(true))
+
+    expect(endState.isFetching).toBeTruthy();
+
+});
+
+test('userId must be added to followingInProgress', () => {
+
+    const endState = usersReducer(state, toggleFollowingProgress(true, 356))
+
+    expect(endState.followingInProgress.length).toBe(1);
+    expect(endState.followingInProgress[0]).toBe(356);
+
 });

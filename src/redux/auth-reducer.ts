@@ -1,11 +1,10 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {Dispatch} from "redux";
 import {AppThunkDispatch} from "./redux-store";
 
 
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA';
-const SET_USER_AVATAR = 'SET_USER_AVATAR';
+const SET_USER_AVATAR = 'samurai-network/auth/SET_USER_AVATAR';
 
 let initialState: authReducerType = {
     userId: null,
