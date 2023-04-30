@@ -1,10 +1,12 @@
 import {profileAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
+import {PhotosType} from "src/redux/users-reducer";
 
 const ADD_POST = 'samurai-network/profile/ADD-POST';
 const SET_USER_PROFILE = 'samurai-network/profile/SET-USER-PROFILE';
 const SET_STATUS = 'samurai-network/profile/SET_STATUS';
 const DELETE_POST = 'samurai-network/profile/DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'samurai-network/SAVE_PHOTO_SUCCESS';
 
 let initialState = {
     posts: [
@@ -42,6 +44,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
                 ...state,
                 posts: state.posts.filter(p => p.id !== action.postId)
             }
+        case SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+               profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state;
     }
@@ -67,6 +74,9 @@ export const setStatus = (status: string) => {
 export const deletePost = (postId: number) => {
     return {type: DELETE_POST, postId} as const
 }
+export const savePhotoSuccess = (photos: any) => {
+    return {type: SAVE_PHOTO_SUCCESS, photos} as const
+}
 
 
 //thunks
@@ -86,6 +96,13 @@ export const updateStatus = (status: string) => async (dispatch: AppThunkDispatc
 
     if (res.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+}
+export const savePhoto = (file: any) => async (dispatch: AppThunkDispatch) => {
+    let res = await profileAPI.savePhoto(file)
+
+    if (res.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(res.data.photos))
     }
 }
 
@@ -115,5 +132,6 @@ export type ProfileActionsTypes =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhoto>
 
 export default profileReducer;

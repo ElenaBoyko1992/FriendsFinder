@@ -105,12 +105,17 @@ export const unfollow = (userId: number) => async (dispatch: AppThunkDispatch) =
 }
 
 //types
+export type PhotosType = {
+    small: string | undefined
+    large: string | undefined
+}
+
 export type UserType = {
-    id: number,
-    photos: { small: string | undefined, large: string | undefined },
-    followed: boolean,
-    name: string,
-    status: string,
+    id: number
+    photos: PhotosType
+    followed: boolean
+    name: string
+    status: string
     location: { city: string, country: string }
 }
 
