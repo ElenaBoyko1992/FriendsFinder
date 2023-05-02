@@ -1,9 +1,9 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, ProfileType, savePhoto, updateStatus} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, ProfileType, savePhoto, updateStatus} from "redux/profile-reducer";
 import {withRouter} from "react-router-dom";
-import {ReduxStoreType} from "../../redux/redux-store";
+import {ReduxStoreType} from "redux/redux-store";
 import {RouteComponentProps} from "react-router";
 import {compose} from "redux";
 
@@ -12,13 +12,13 @@ export type  ProfileMapStatePropsType = {
     status: string
     autorizedUserId: any
     isAuth: boolean
-
-}
+};
 type  MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string | undefined) => void
     updateStatus: (status: string) => void
     savePhoto: (file: any) => void
+    saveProfile: (profile: any) => void
 }
 type ProfileContainerPropsType = ProfileMapStatePropsType & MapDispatchPropsType
 
@@ -75,6 +75,6 @@ const mapStateToProps = (state: ReduxStoreType): ProfileMapStatePropsType => ({
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter,
 )(ProfileContainer)

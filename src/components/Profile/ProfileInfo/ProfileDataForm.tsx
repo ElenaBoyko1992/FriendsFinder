@@ -1,0 +1,45 @@
+import React from "react";
+import {ProfileType} from "redux/profile-reducer";
+import {createField, Input, Textarea} from "components/common/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import profile from "components/Profile/Profile";
+
+
+const ProfileDataForm = ({profile, handleSubmit}: ProfileDataFormPropsType) => {
+
+    return <form onSubmit={handleSubmit}>
+        <div>
+            <button>save</button>
+        </div>
+        <div>
+            <b>Full name</b>: {createField('Full name', 'fullName', [], Input)}
+        </div>
+        <div>
+            <b>Looking for a job</b>: {createField('', 'lookingForAJob', [], Input, {type: 'checkBox'})}
+        </div>
+        <div>
+            <b>My professional
+                skills</b>: {createField('My professional skills', 'lookingForAJobDescription', [], Textarea)}
+        </div>
+        <div>
+            <b>About me</b>: {profile.aboutMe}
+            {createField('About me', 'aboutMe', [], Textarea)}
+        </div>
+        {/*<div>*/}
+        {/*    <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {*/}
+        {/*    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>*/}
+        {/*})}*/}
+        {/*</div>*/}
+    </form>
+}
+
+//types
+type ProfileDataFormPropsType = {
+    profile: ProfileType
+    handleSubmit: (formData: any) => void
+}
+
+
+const ProfileDataFormReduxForm = reduxForm<any, ProfileDataFormPropsType, Record<string, any>>({form: 'edit-profile'})(ProfileDataForm)
+
+export default ProfileDataFormReduxForm

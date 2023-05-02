@@ -1,19 +1,25 @@
-import React, {ChangeEvent, ChangeEventHandler} from 'react';
+import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-import {ProfileType} from "../../../redux/profile-reducer";
+import {ProfileType} from "redux/profile-reducer";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/defaultAvatar.png";
+import ProfileDataForm from "components/Profile/ProfileInfo/ProfileDataForm";
+
 
 type ProfileInfoType = {
-    profile: ProfileType | null | undefined
+    profile: null | undefined | ProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: any) => void
+    saveProfile: (profile: any) => void
 }
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}: ProfileInfoType) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoType) => {
+
+    const [editMode, setEditMode] = useState(false);
+
     if (!profile) {
         return <Preloader/>
     }
@@ -24,20 +30,64 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}: Profil
         }
     }
 
+    const onSubmit = (formData: any) => {
+        saveProfile(formData);
+    }
+
     return (
         <div>
             <div className={s.descriptionBlock}>
                 <img src={profile.photos.large || userPhoto} alt={''} className={s.mainPhoto}/>
                 {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
-                <br/>
-                about me: {profile.aboutMe}
-                <br/>
-                contacts: {profile.contacts.twitter}
-                <br/>
+
+                {editMode ? <ProfileDataForm profile={profile} handleSubmit={onSubmit}/> :
+                    <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
+
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )
+}
+
+const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => {
+    return <div>
+        <div>
+            {isOwner && <button onClick={goToEditMode}>edit</button>}
+        </div>
+        <div>
+            <b>Full name</b>: {profile.fullName}
+        </div>
+        <div>
+            <b>Looking for a job</b>: {profile.lookingForAJob ? 'yes' : 'no'}
+        </div>
+        {profile.lookingForAJob &&
+            <div>
+                <b>My professional skills</b>: {profile.lookingForAJobDescription}
+            </div>}
+        <div>
+            <b>About me</b>: {profile.aboutMe}
+        </div>
+        <div>
+            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+        })}
+        </div>
+    </div>
+}
+
+const Contact = ({contactTitle, contactValue}: ContactPropsType) => {
+    return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
+}
+
+//types
+type ContactPropsType = {
+    contactTitle: string
+    contactValue: string
+}
+type ProfileDataPropsType = {
+    profile: ProfileType
+    isOwner: boolean
+    goToEditMode: () => void
 }
 
 export default ProfileInfo;

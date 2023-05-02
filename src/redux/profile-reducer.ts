@@ -104,6 +104,13 @@ export const savePhoto = (file: any) => async (dispatch: AppThunkDispatch) => {
         dispatch(savePhotoSuccess(res.data.data.photos))
     }
 }
+export const saveProfile = (profile: any) => async (dispatch: AppThunkDispatch) => {
+    let res = await profileAPI.saveProfile(profile)
+
+    if (res.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(res.data.data.photos))
+    }
+}
 
 //types
 type PostsType = {
