@@ -1,6 +1,5 @@
 import {profileAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
-import {PhotosType} from "src/redux/users-reducer";
 
 const ADD_POST = 'samurai-network/profile/ADD-POST';
 const SET_USER_PROFILE = 'samurai-network/profile/SET-USER-PROFILE';
@@ -47,7 +46,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
-               profile: {...state.profile, photos: action.photos}
+                profile: {...state.profile, photos: action.photos}
             }
         default:
             return state;
@@ -102,7 +101,7 @@ export const savePhoto = (file: any) => async (dispatch: AppThunkDispatch) => {
     let res = await profileAPI.savePhoto(file)
 
     if (res.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(res.data.photos))
+        dispatch(savePhotoSuccess(res.data.data.photos))
     }
 }
 
@@ -113,13 +112,13 @@ type PostsType = {
     likesAmount: number
 }
 export type ProfileType = {
-    aboutMe: string
-    contacts: any
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    photos: any
-    userId: number
+    aboutMe?: string
+    contacts?: any
+    fullName?: string
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
+    userId?: number
+    photos?: any
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -132,6 +131,6 @@ export type ProfileActionsTypes =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePost>
-    | ReturnType<typeof savePhoto>
+    | ReturnType<typeof savePhotoSuccess>
 
 export default profileReducer;

@@ -10,6 +10,7 @@ type ProfileInfoType = {
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
+    savePhoto: (file: any) => void
 }
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}: ProfileInfoType) => {

@@ -1,13 +1,11 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, ProfileType, updateStatus} from "../../redux/profile-reducer";
-import {Redirect, withRouter} from "react-router-dom";
+import {getStatus, getUserProfile, ProfileType, savePhoto, updateStatus} from "../../redux/profile-reducer";
+import {withRouter} from "react-router-dom";
 import {ReduxStoreType} from "../../redux/redux-store";
 import {RouteComponentProps} from "react-router";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import Dialogs from "../Dialogs/Dialogs";
 
 export type  ProfileMapStatePropsType = {
     profile: null | undefined | ProfileType
@@ -20,6 +18,7 @@ type  MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string | undefined) => void
     updateStatus: (status: string) => void
+    savePhoto: (file: any) => void
 }
 type ProfileContainerPropsType = ProfileMapStatePropsType & MapDispatchPropsType
 
