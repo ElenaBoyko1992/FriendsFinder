@@ -1,16 +1,24 @@
-import React from "react";
+import React, {FC} from "react";
 import {ProfileType} from "redux/profile-reducer";
 import {createField, Input, Textarea} from "components/common/FormsControls/FormsControls";
-import {InjectedFormProps, reduxForm} from "redux-form";
-import profile from "components/Profile/Profile";
+import {Form, InjectedFormProps, reduxForm} from "redux-form";
 
 
-const ProfileDataForm = ({profile, handleSubmit}: ProfileDataFormPropsType) => {
+type FieldFromType = {
+    fullName: string
+    lookingForAJob: string
+    lookingForAJobDescription: string
+    aboutMe: string
+}
 
-    return <form onSubmit={handleSubmit}>
-        <div>
-            <button>save</button>
-        </div>
+type OtherFormProps = {
+    profile: ProfileType
+}
+
+const ProfileDataForm: FC<InjectedFormProps<FieldFromType,OtherFormProps> & OtherFormProps> = ({profile, handleSubmit}) => {
+
+    return <form onSubmit={handleSubmit} >
+
         <div>
             <b>Full name</b>: {createField('Full name', 'fullName', [], Input)}
         </div>
@@ -25,6 +33,9 @@ const ProfileDataForm = ({profile, handleSubmit}: ProfileDataFormPropsType) => {
             <b>About me</b>: {profile.aboutMe}
             {createField('About me', 'aboutMe', [], Textarea)}
         </div>
+        <div>
+            <button>save</button>
+        </div>
         {/*<div>*/}
         {/*    <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {*/}
         {/*    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>*/}
@@ -33,13 +44,8 @@ const ProfileDataForm = ({profile, handleSubmit}: ProfileDataFormPropsType) => {
     </form>
 }
 
-//types
-type ProfileDataFormPropsType = {
-    profile: ProfileType
-    handleSubmit: (formData: any) => void
-}
 
 
-const ProfileDataFormReduxForm = reduxForm<any, ProfileDataFormPropsType, Record<string, any>>({form: 'edit-profile'})(ProfileDataForm)
+const ProfileDataFormReduxForm = reduxForm<FieldFromType, OtherFormProps>({form: 'edit-profile'})(ProfileDataForm)
 
 export default ProfileDataFormReduxForm

@@ -1,4 +1,4 @@
-import {profileAPI} from "../api/api";
+import {profileAPI, ProfileForUpdateType} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 
 const ADD_POST = 'samurai-network/profile/ADD-POST';
@@ -11,8 +11,8 @@ let initialState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesAmount: 5},
         {id: 2, message: 'Hi, its my first post', likesAmount: 11},
-        {id: 2, message: 'Blabla', likesAmount: 11},
-        {id: 2, message: 'Dada', likesAmount: 11},
+        {id: 3, message: 'Blabla', likesAmount: 11},
+        {id: 4, message: 'Dada', likesAmount: 11},
     ],
     profile: null,
     status: ''
@@ -104,12 +104,12 @@ export const savePhoto = (file: any) => async (dispatch: AppThunkDispatch) => {
         dispatch(savePhotoSuccess(res.data.data.photos))
     }
 }
-export const saveProfile = (profile: any) => async (dispatch: AppThunkDispatch) => {
+export const saveProfile = (profile: ProfileForUpdateType) => async (dispatch: AppThunkDispatch) => {
     let res = await profileAPI.saveProfile(profile)
+if (res.data.resultCode===0){
 
-    if (res.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(res.data.data.photos))
-    }
+}
+
 }
 
 //types

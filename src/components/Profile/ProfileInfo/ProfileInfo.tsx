@@ -5,18 +5,19 @@ import {ProfileType} from "redux/profile-reducer";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/defaultAvatar.png";
 import ProfileDataForm from "components/Profile/ProfileInfo/ProfileDataForm";
+import {ProfileForUpdateType} from "api/api";
 
 
-type ProfileInfoType = {
-    profile: null | undefined | ProfileType
-    status: string
-    updateStatus: (status: string) => void
-    isOwner: boolean
-    savePhoto: (file: any) => void
-    saveProfile: (profile: any) => void
-}
+// type ProfileInfoType = {
+//     profile: null | undefined | ProfileType
+//     status: string
+//     updateStatus: (status: string) => void
+//     isOwner: boolean
+//     savePhoto: (file: any) => void
+//     saveProfile: (profile: ProfileForUpdateType) => void
+// }
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoType) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: any) => {
 
     const [editMode, setEditMode] = useState(false);
 
@@ -31,7 +32,9 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
     }
 
     const onSubmit = (formData: any) => {
-        saveProfile(formData);
+
+        // saveProfile(formData);
+        console.log(formData)
     }
 
     return (
@@ -40,7 +43,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
                 <img src={profile.photos.large || userPhoto} alt={''} className={s.mainPhoto}/>
                 {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
 
-                {editMode ? <ProfileDataForm profile={profile} handleSubmit={onSubmit}/> :
+                {editMode ? <ProfileDataForm profile={profile} onSubmit={onSubmit}/> :
                     <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
 
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
@@ -49,7 +52,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
     )
 }
 
-const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => {
+const ProfileData = ({profile, isOwner, goToEditMode}: any) => {
     return <div>
         <div>
             {isOwner && <button onClick={goToEditMode}>edit</button>}
@@ -84,10 +87,10 @@ type ContactPropsType = {
     contactTitle: string
     contactValue: string
 }
-type ProfileDataPropsType = {
-    profile: ProfileType
-    isOwner: boolean
-    goToEditMode: () => void
-}
+// type ProfileDataPropsType = {
+//     profile: ProfileType
+//     isOwner: boolean
+//     goToEditMode: () => void
+// }
 
 export default ProfileInfo;

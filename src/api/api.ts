@@ -74,5 +74,26 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         });
+    },
+    saveProfile(profile: ProfileForUpdateType) {
+        return instance.put(`profile`, profile)
+    }
+}
+
+//types
+export type ProfileForUpdateType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
     }
 }
