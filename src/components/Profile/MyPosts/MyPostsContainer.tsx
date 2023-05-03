@@ -43,7 +43,8 @@ export type MyPostsType = MapStatePropsType & mapDispatchPropsType
 let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
     return {
         posts: state.profilePage.posts,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        profile: state.profilePage.profile
     }
 }
 

@@ -1,4 +1,4 @@
-import {profileAPI, ProfileForUpdateType} from "../api/api";
+import {profileAPI, ProfileType} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 
 const ADD_POST = 'samurai-network/profile/ADD-POST';
@@ -17,6 +17,7 @@ let initialState = {
     profile: null,
     status: ''
 }
+
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes): ProfilePageType => {
     switch (action.type) {
@@ -46,7 +47,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: {...state.profile, photos: action.photos} as ProfileType
             }
         default:
             return state;
@@ -104,11 +105,11 @@ export const savePhoto = (file: any) => async (dispatch: AppThunkDispatch) => {
         dispatch(savePhotoSuccess(res.data.data.photos))
     }
 }
-export const saveProfile = (profile: ProfileForUpdateType) => async (dispatch: AppThunkDispatch) => {
+export const saveProfile = (profile: ProfileType) => async (dispatch: AppThunkDispatch) => {
     let res = await profileAPI.saveProfile(profile)
-if (res.data.resultCode===0){
+    if (res.data.resultCode === 0) {
 
-}
+    }
 
 }
 
@@ -118,18 +119,20 @@ type PostsType = {
     message: string
     likesAmount: number
 }
-export type ProfileType = {
-    aboutMe?: string
-    contacts?: any
-    fullName?: string
-    lookingForAJob?: boolean
-    lookingForAJobDescription?: string
-    userId?: number
-    photos?: any
-}
+
+//old uncorrect type
+// export type ProfileType = {
+//     aboutMe?: string
+//     contacts?: any
+//     fullName?: string
+//     lookingForAJob?: boolean
+//     lookingForAJobDescription?: string
+//     userId?: number
+//     photos?: any
+// }
 export type ProfilePageType = {
     posts: Array<PostsType>
-    profile?: null | ProfileType
+    profile: ProfileType | null
     status: string
 }
 

@@ -75,13 +75,13 @@ export const profileAPI = {
             }
         });
     },
-    saveProfile(profile: ProfileForUpdateType) {
+    saveProfile(profile: ProfileType) {
         return instance.put(`profile`, profile)
     }
 }
 
 //types
-export type ProfileForUpdateType = {
+export type ProfileType = {
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -95,5 +95,9 @@ export type ProfileForUpdateType = {
         website: string
         youtube: string
         mainLink: string
+    }
+    photos?: {
+        small: string | null
+        large: string | null
     }
 }

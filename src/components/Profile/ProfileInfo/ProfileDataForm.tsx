@@ -1,7 +1,7 @@
 import React, {FC} from "react";
-import {ProfileType} from "redux/profile-reducer";
 import {createField, Input, Textarea} from "components/common/FormsControls/FormsControls";
 import {Form, InjectedFormProps, reduxForm} from "redux-form";
+import {ProfileType} from "api/api";
 
 
 type FieldFromType = {
@@ -29,10 +29,10 @@ const ProfileDataForm: FC<InjectedFormProps<FieldFromType,OtherFormProps> & Othe
             <b>My professional
                 skills</b>: {createField('My professional skills', 'lookingForAJobDescription', [], Textarea)}
         </div>
-        <div>
-            <b>About me</b>: {profile.aboutMe}
-            {createField('About me', 'aboutMe', [], Textarea)}
-        </div>
+        {/*<div>*/}
+        {/*    <b>About me</b>: {profile.aboutMe}*/}
+        {/*    {createField('About me', 'aboutMe', [], Textarea)}*/}
+        {/*</div>*/}
         <div>
             <button>save</button>
         </div>
