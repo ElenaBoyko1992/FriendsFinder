@@ -5,7 +5,8 @@ const startState = {
     email: null,
     login: null,
     isAuth: false,
-    userAvatar: null
+    userAvatar: null,
+    captchaUrl: null
 };
 
 test('user data must be set', () => {
