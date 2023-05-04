@@ -58,7 +58,7 @@ test('profile must be setted', () => {
     const endState = profileReducer(startState, setUserProfile(profile))
 
     expect(endState.profile).toBeTruthy();
-    //expect(endState.profile?.aboutMe).toBe('i am...');
+    expect(endState.profile?.aboutMe).toBe('i am...');
 });
 
 test('status must be setted', () => {

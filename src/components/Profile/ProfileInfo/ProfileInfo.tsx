@@ -22,12 +22,11 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
         }
     }
 
-    const onSubmit = (formData: any) => {
-
-       // saveProfile(formData);
-
-        console.log(formData)
-
+    const onSubmit = (formData: ProfileType) => {
+        saveProfile(formData).then(
+            () => {
+                setEditMode(false)
+            });
     }
 
     return (
@@ -36,7 +35,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
                 <img src={profile.photos?.large || userPhoto} alt={''} className={s.mainPhoto}/>
                 {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
 
-                {editMode ? <ProfileDataForm profile={profile} onSubmit={onSubmit}/> :
+                {editMode ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> :
                     <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
 
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
@@ -60,24 +59,25 @@ const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataType) => {
             <div>
                 <b>My professional skills</b>: {profile.lookingForAJobDescription}
             </div>}
-        {/*<div>*/}
-        {/*    <b>About me</b>: {profile.aboutMe}*/}
-        {/*</div>*/}
         <div>
-            <b>Contacts</b>: {profile.contacts && Object.keys(profile.contacts).map((key) => {
-            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof typeof profile.contacts]}/>
+            <b>About me</b>: {profile.aboutMe}
+        </div>
+        <div>
+            <b>Contacts</b>: {Object.keys(profile.contacts).map((key) => {
+            return <Contact key={key} contactTitle={key}
+                            contactValue={profile.contacts[key as keyof typeof profile.contacts]}/>
         })}
         </div>
     </div>
 }
-const Contact = ({contactTitle, contactValue}: ContactPropsType) => {
+export const Contact = ({contactTitle, contactValue}: ContactPropsType) => {
     return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
 }
 
 //types
 type ContactPropsType = {
     contactTitle: string
-    contactValue: string
+    contactValue: string | null
 }
 // type ProfileDataPropsType = {
 //     profile: ProfileType
@@ -91,7 +91,7 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: any) => void
-    saveProfile: (profile: ProfileType) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
 }
 
 type ProfileDataType = {

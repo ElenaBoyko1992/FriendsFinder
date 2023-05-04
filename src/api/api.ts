@@ -56,10 +56,10 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-    getUserProfileData(userId: string) {
+    getUserProfileData(userId: number) {
         return instance.get(`profile/${userId}`)
     },
-    getStatus(userId: string) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
     },
     updateStatus(status: string) {
@@ -83,18 +83,19 @@ export const profileAPI = {
 //types
 export type ProfileType = {
     userId: number
+    aboutMe: string | null
     lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
+    lookingForAJobDescription: string | null
+    fullName: string | null
     contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
+        github: string | null
+        vk: string | null
+        facebook: string | null
+        instagram: string | null
+        twitter: string | null
+        website: string | null
+        youtube: string | null
+        mainLink: string | null
     }
     photos?: {
         small: string | null

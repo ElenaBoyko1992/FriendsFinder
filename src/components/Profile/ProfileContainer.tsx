@@ -20,7 +20,7 @@ type  MapDispatchPropsType = {
     getStatus: (userId: string | undefined) => void
     updateStatus: (status: string) => void
     savePhoto: (file: any) => void
-    saveProfile: (profile: ProfileType) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
 }
 type ProfileContainerPropsType = ProfileMapStatePropsType & MapDispatchPropsType
 

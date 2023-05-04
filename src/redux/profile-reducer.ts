@@ -1,5 +1,6 @@
 import {profileAPI, ProfileType} from "../api/api";
-import {AppThunkDispatch} from "./redux-store";
+import {AppThunkDispatch, ReduxStoreType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'samurai-network/profile/ADD-POST';
 const SET_USER_PROFILE = 'samurai-network/profile/SET-USER-PROFILE';
@@ -80,13 +81,13 @@ export const savePhotoSuccess = (photos: any) => {
 
 
 //thunks
-export const getUserProfile = (userId: string) => async (dispatch: AppThunkDispatch) => {
+export const getUserProfile = (userId: number) => async (dispatch: AppThunkDispatch) => {
     let response = await profileAPI.getUserProfileData(userId)
 
     dispatch(setUserProfile(response.data))
 }
 
-export const getStatus = (userId: string) => async (dispatch: AppThunkDispatch) => {
+export const getStatus = (userId: number) => async (dispatch: AppThunkDispatch) => {
     let res = await profileAPI.getStatus(userId)
 
     dispatch(setStatus(res.data))
@@ -105,10 +106,18 @@ export const savePhoto = (file: any) => async (dispatch: AppThunkDispatch) => {
         dispatch(savePhotoSuccess(res.data.data.photos))
     }
 }
-export const saveProfile = (profile: ProfileType) => async (dispatch: AppThunkDispatch) => {
+export const saveProfile = (profile: ProfileType) => async (dispatch: AppThunkDispatch, getState: () => ReduxStoreType) => {
+    const userId = getState().auth.userId;
     let res = await profileAPI.saveProfile(profile)
-    if (res.data.resultCode === 0) {
 
+    if (res.data.resultCode === 0) {
+        if (userId) {
+            dispatch(getUserProfile(userId))
+        }
+
+    } else {
+        dispatch(stopSubmit('edit-profile', {_error: res.data.messages[0]}))
+        return Promise.reject(res.data.messages[0])
     }
 
 }

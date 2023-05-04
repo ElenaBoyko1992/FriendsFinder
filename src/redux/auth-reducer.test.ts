@@ -9,7 +9,7 @@ const startState = {
 };
 
 test('user data must be set', () => {
-    const endState = authReducer(startState, setAuthUserData('123', 'Boiko@mail.ru', 'Elena', true))
+    const endState = authReducer(startState, setAuthUserData(123, 'Boiko@mail.ru', 'Elena', true))
 
     expect(endState.isAuth).toBeTruthy();
     expect(endState.login).toBe('Elena');
