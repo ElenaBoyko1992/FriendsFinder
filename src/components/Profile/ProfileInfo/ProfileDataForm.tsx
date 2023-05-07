@@ -1,9 +1,9 @@
 import React, {FC} from "react";
 import {createField, Input, Textarea} from "components/common/FormsControls/FormsControls";
 import {Form, InjectedFormProps, reduxForm} from "redux-form";
-import {ProfileType} from "api/api";
 import s from './ProfileInfo.module.css';
 import style from '../../common/FormsControls/FormsControls.module.css'
+import {ProfileType} from "api/types";
 
 type FieldFromType = ProfileType
 //     {

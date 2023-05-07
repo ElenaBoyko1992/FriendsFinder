@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./users.module.css";
 import userPhoto from "../../assets/images/defaultAvatar.png";
-import {UserType} from "../../redux/users-reducer";
+
 import {NavLink} from "react-router-dom";
+import {UserType} from "api/types";
 
 
 export type UserPropsType = {
@@ -30,16 +31,12 @@ let User = ({user, followingInProgress, unfollow, follow}: UserPropsType) => {
                               onClick={() => follow(user.id)}>Follow</button>}
                     </div>
                     </span>
+
         <span>
-                    <span>
                     <div>{user.name}</div>
-                    <div>{user.status}</div>
+                    <div>{user.status || 'no status'}</div>
                     </span>
-                    <span>
-                    <div>{"user.location.country"}</div>
-                    <div>{"user.location.city"}</div>
-                    </span>
-                    </span>
+
     </div>
 }
 

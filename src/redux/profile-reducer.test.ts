@@ -67,5 +67,5 @@ test('status must be setted', () => {
 
     expect(endState.status).toBeTruthy();
     expect(endState.status).toBe('Hey!');
-    expect(endState.status.length).toBe(4);
+    expect(endState.status?.length).toBe(4);
 });

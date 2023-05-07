@@ -18,19 +18,19 @@ test('users must be set', () => {
     const users = [
         {
             id: 1,
-            photos: {small: undefined, large: undefined},
+            photos: {small: null, large: null},
             followed: true,
             name: 'John',
             status: 'free',
-            location: {city: 'Moscow', country: 'Russia'}
+
         },
         {
             id: 2,
-            photos: {small: undefined, large: undefined},
+            photos: {small: null, large: null},
             followed: false,
             name: 'Kate',
             status: 'hello',
-            location: {city: 'Moscow', country: 'Russia'}
+
         }
     ]
 

@@ -1,6 +1,7 @@
 import {followingAPI, usersAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 import {updateObjectInArray} from "../utils/object-helpers";
+import {UserType} from "api/types";
 
 const FOLLOW = 'samurai-network/users/FOLLOW';
 const UNFOLLOW = 'samurai-network/users/UNFOLLOW';
@@ -105,19 +106,19 @@ export const unfollow = (userId: number) => async (dispatch: AppThunkDispatch) =
 }
 
 //types
-export type PhotosType = {
-    small: string | undefined
-    large: string | undefined
-}
+// export type PhotosType = {
+//     small: string | undefined
+//     large: string | undefined
+// }
 
-export type UserType = {
-    id: number
-    photos: PhotosType
-    followed: boolean
-    name: string
-    status: string
-    location: { city: string, country: string }
-}
+// export type UserType = {
+//     id: number
+//     photos: PhotosType
+//     followed: boolean
+//     name: string
+//     status: string
+//     location: { city: string, country: string }
+// }
 
 export type UsersPageType = {
     users: Array<UserType>

@@ -6,12 +6,12 @@ import {withRouter} from "react-router-dom";
 import {ReduxStoreType} from "redux/redux-store";
 import {RouteComponentProps} from "react-router";
 import {compose} from "redux";
-import {ProfileType} from "api/api";
+import {ProfileType} from "api/types";
 
 
 export type  ProfileMapStatePropsType = {
     profile: null | undefined | ProfileType
-    status: string
+    status: string | null
     autorizedUserId: any
     isAuth: boolean
 };

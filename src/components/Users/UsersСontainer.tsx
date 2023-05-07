@@ -1,12 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ReduxStoreType} from "../../redux/redux-store";
+import {ReduxStoreType} from "redux/redux-store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {
     setCurrentPage,
-    UserType, follow, unfollow, requestUsers
-} from "../../redux/users-reducer";
+     follow, unfollow, requestUsers
+} from "redux/users-reducer";
 import {compose} from "redux";
 import {
     getCurrentPage,
@@ -15,25 +15,8 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsers
-} from "../../redux/users-selectors";
-
-
-type MapStatePropsType = {
-    users: Array<UserType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: Array<number>
-}
-type mapDispatchPropsType = {
-    setCurrentPage: (pageNumber: number) => void
-    requestUsers: (currentPage: number, pageSize: number) => void
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-}
-
-export type UsersAPIComponentPropsType = MapStatePropsType & mapDispatchPropsType
+} from "redux/users-selectors";
+import {UserType} from "api/types";
 
 //ex. UsersAPIComponent (for information)
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
@@ -105,3 +88,21 @@ export default compose<React.ComponentType>(
         setCurrentPage, requestUsers, follow, unfollow
     })
 )(UsersContainer)
+
+//types
+type MapStatePropsType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: Array<number>
+}
+type mapDispatchPropsType = {
+    setCurrentPage: (pageNumber: number) => void
+    requestUsers: (currentPage: number, pageSize: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
+
+export type UsersAPIComponentPropsType = MapStatePropsType & mapDispatchPropsType

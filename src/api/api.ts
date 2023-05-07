@@ -1,4 +1,5 @@
-import {default as axios} from "axios";
+import {AxiosResponse, default as axios} from "axios";
+import {MeResponseDataType, PhotosType, ProfileType, ResponseType, UsersTypeFromServer} from "api/types";
 
 //instance помогает избегать дублирования кода. Все данные из instance попадут при его дальнейшем использовании
 //в запрос на сервер. Т.е. instance теперь используется в коде ниже вместо "axios"
@@ -14,97 +15,65 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get<UsersTypeFromServer>(`users?page=${currentPage}&count=${pageSize}`)
             .then((response: any) => response.data)
     }
 }
 
 export const followingAPI = {
     follow(userId: number) {
-        return instance.post(`follow/${userId}`)
-            .then((response: any) => response.data)
+        return instance.post<ResponseType>(`follow/${userId}`)
+            .then((response: AxiosResponse<ResponseType<{}>>) => response.data)
     },
     unfollow(userId: number) {
-        return instance.delete(`follow/${userId}`)
-            .then((response: any) => response.data)
+        return instance.delete<ResponseType>(`follow/${userId}`)
+            .then((response: AxiosResponse<ResponseType<{}>>) => response.data)
     }
 }
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
-            .then((response: any) => response.data)
+        return instance.get<ResponseType<MeResponseDataType>>(`auth/me`)
+            .then((response: AxiosResponse<ResponseType<MeResponseDataType>>) => response.data)
     },
-    // getMyProfileData(myId: number) {
-    //     debugger
-    //     return axios.get(`profile/${myId}`)
-    //         .then((response: any) => {
-    //             debugger
-    //             return response.data
-    //         })
-    // },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
-        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
-            .then((response: any) => response.data)
+        return instance.post<ResponseType<{ userId: number }>>(`auth/login`, {email, password, rememberMe, captcha})
+            .then((response: AxiosResponse<ResponseType<{ userId: number }>>) => response.data)
     },
     logout() {
-        return instance.delete(`auth/login`)
-            .then((response: any) => response.data)
+        return instance.delete<ResponseType>(`auth/login`)
+            .then((response: AxiosResponse<ResponseType<{}>>) => response.data)
     },
-
-
 }
 
 export const profileAPI = {
     getUserProfileData(userId: number) {
-        return instance.get(`profile/${userId}`)
+        return instance.get<ProfileType>(`profile/${userId}`)
     },
     getStatus(userId: number) {
-        return instance.get(`profile/status/${userId}`)
+        return instance.get<string | null>(`profile/status/${userId}`)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status`, {status})
+        return instance.put<ResponseType>(`profile/status`, {status})
     },
     savePhoto(photoFile: any) {
         const formData = new FormData();
         formData.append('image', photoFile)
 
-        return instance.put(`profile/photo`, formData, {
+        return instance.put<ResponseType<{ photos?: PhotosType }>>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         });
     },
     saveProfile(profile: ProfileType) {
-        return instance.put(`profile`, profile)
+        return instance.put<ResponseType>(`profile`, profile)
     }
 }
 
 export const securityAPI = {
     getCaptchaUrl() {
-        return instance.get(`security/get-captcha-url`)
+        return instance.get<{ url: string }>(`security/get-captcha-url`)
     }
 }
 
-//types
-export type ProfileType = {
-    userId: number
-    aboutMe: string | null
-    lookingForAJob: boolean
-    lookingForAJobDescription: string | null
-    fullName: string | null
-    contacts: {
-        github: string | null
-        vk: string | null
-        facebook: string | null
-        instagram: string | null
-        twitter: string | null
-        website: string | null
-        youtube: string | null
-        mainLink: string | null
-    }
-    photos?: {
-        small: string | null
-        large: string | null
-    }
-}

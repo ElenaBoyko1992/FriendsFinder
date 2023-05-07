@@ -1,6 +1,7 @@
-import {profileAPI, ProfileType} from "../api/api";
+import {profileAPI} from "../api/api";
 import {AppThunkDispatch, ReduxStoreType} from "./redux-store";
 import {stopSubmit} from "redux-form";
+import {ProfileType} from "api/types";
 
 const ADD_POST = 'samurai-network/profile/ADD-POST';
 const SET_USER_PROFILE = 'samurai-network/profile/SET-USER-PROFILE';
@@ -66,7 +67,7 @@ export const setUserProfile = (profile: ProfileType) => {
         profile
     } as const
 }
-export const setStatus = (status: string) => {
+export const setStatus = (status: string | null) => {
     return {
         type: SET_STATUS,
         status
@@ -89,7 +90,6 @@ export const getUserProfile = (userId: number) => async (dispatch: AppThunkDispa
 
 export const getStatus = (userId: number) => async (dispatch: AppThunkDispatch) => {
     let res = await profileAPI.getStatus(userId)
-
     dispatch(setStatus(res.data))
 }
 export const updateStatus = (status: string) => async (dispatch: AppThunkDispatch) => {
@@ -142,7 +142,7 @@ type PostsType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     profile: ProfileType | null
-    status: string
+    status: string | null
 }
 
 export type ProfileActionsTypes =

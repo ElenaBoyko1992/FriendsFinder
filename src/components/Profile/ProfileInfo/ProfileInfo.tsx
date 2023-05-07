@@ -1,11 +1,10 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/defaultAvatar.png";
 import ProfileDataForm from "components/Profile/ProfileInfo/ProfileDataForm";
-import {ProfileType} from "api/api";
-import Login from "components/Login/Login";
+import {ProfileType} from "api/types";
 
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoType) => {
@@ -87,7 +86,7 @@ type ContactPropsType = {
 
 type ProfileInfoType = {
     profile: ProfileType | null | undefined
-    status: string
+    status: string | null
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: any) => void
