@@ -17,7 +17,7 @@ const Header = (props: HeaderPropsType) => {
                 {props.isAuth ?
                     <div>{props.login} <button onClick={props.logout}>Log out</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>}
-                {props.isAuth && <img src={props.userAvatar ? props.userAvatar : userPhoto} alt=""/>}
+                {props.isAuth && <img src={props.userAvatar || userPhoto} alt=""/>}
             </div>
 
         </header>

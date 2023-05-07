@@ -8,7 +8,7 @@ import {ReduxStoreType} from "../../redux/redux-store";
 type MapStatePropsType = {
     isAuth: boolean,
     login: null | string,
-    userAvatar: null | string
+    userAvatar?: null | string
 }
 type MapDispatchPropsType = {
     logout: () => void
@@ -30,7 +30,7 @@ class HeaderContainer extends React.Component<HeaderPropsType> {
 const mapStateToProps = (state: ReduxStoreType): MapStatePropsType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
-    userAvatar: state.auth.userAvatar
+    userAvatar: state.profilePage.profile?.photos?.small
 });
 
 export default connect(mapStateToProps, {logout})(HeaderContainer);

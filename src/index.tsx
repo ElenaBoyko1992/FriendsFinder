@@ -1,11 +1,6 @@
 import React from 'react';
 import './index.css';
-import store from "./redux/redux-store";
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from "../src/App";
-import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
 import SamuraiJSApp from "../src/App";
 
 

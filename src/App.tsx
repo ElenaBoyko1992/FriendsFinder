@@ -1,13 +1,13 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersСontainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {initializeApp} from "./redux/app-reducer";
+import {initializeApp} from "redux/app-reducer";
 import store, {ReduxStoreType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
 
@@ -31,21 +31,29 @@ class App extends React.Component<AppPropsType> {
                 <div className={'app-wrapper-content'}>
                     <Suspense fallback={<Preloader/>}>
 
-                        {/* <Route path={'/dialogs'} component={Dialogs}/> применять при передаче компоненты без пропсов
+                        <Switch>
+                            {/* <Route path={'/dialogs'} component={Dialogs}/> применять при передаче компоненты без пропсов
                     <Route path={'/profile'} component={Profile}/> применять при передаче компоненты без пропсов*/}
-                        <Route path={'/dialogs'}
-                               render={() => <DialogsContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
-                        <Route
-                            path={'/profile/:userId?'} //указываем, что в адресе после profile может также прийти userId.
-                            //"?" указывает на то, что параметр :userId является опциональным
-                            render={() => <ProfileContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
-                        <Route path={'/users'}
-                               render={() => <UsersContainer/>}/>
-                        <Route path={'/login'}
-                               render={() => <LoginPage/>}/>
-                        {/*                    <Route path={'/news'} component={News}/>
+                            <Route exact path={'/'}
+                                   render={() =>
+                                       <Redirect to={'/profile'}/>}/> {/*применять при передаче компоненты c пропсами*/}
+                            <Route path={'/dialogs'}
+                                   render={() =>
+                                       <DialogsContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
+                            <Route
+                                path={'/profile/:userId?'} //указываем, что в адресе после profile может также прийти userId.
+                                //"?" указывает на то, что параметр :userId является опциональным
+                                render={() => <ProfileContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
+                            <Route path={'/users'}
+                                   render={() => <UsersContainer/>}/>
+                            <Route path={'/login'}
+                                   render={() => <LoginPage/>}/>
+                            <Route path={'*'}
+                                   render={() => <div>404 NOT FOUND</div>}/>
+                            {/*                    <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>*/}
+                        </Switch>
 
                     </Suspense>
                 </div>
