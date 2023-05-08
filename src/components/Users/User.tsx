@@ -1,17 +1,8 @@
 import React from "react";
 import s from "./users.module.css";
 import userPhoto from "../../assets/images/defaultAvatar.png";
-
 import {NavLink} from "react-router-dom";
 import {UserType} from "api/types";
-
-
-export type UserPropsType = {
-    user: UserType
-    followingInProgress: Array<number>
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
-}
 
 let User = ({user, followingInProgress, unfollow, follow}: UserPropsType) => {
 
@@ -41,3 +32,11 @@ let User = ({user, followingInProgress, unfollow, follow}: UserPropsType) => {
 }
 
 export default User
+
+//types
+export type UserPropsType = {
+    user: UserType
+    followingInProgress: Array<number>
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
+}

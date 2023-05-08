@@ -1,15 +1,6 @@
 import React, {useState} from "react";
 import s from "./Paginator.module.css";
 
-
-type PaginatorType = {
-    totalItemsCount: number
-    pageSize: number
-    onPageChanged: (pageNumber: number) => void
-    currentPage: number
-    portionSize: number
-}
-
 const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize}: PaginatorType) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
@@ -34,7 +25,8 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map((p) => {
-                    return <span key={p} className={(currentPage === p) ? `${s.selectedPage} ${s.pageNumber}` : s.pageNumber}
+                    return <span key={p}
+                                 className={(currentPage === p) ? `${s.selectedPage} ${s.pageNumber}` : s.pageNumber}
                                  onClick={() => {
                                      onPageChanged(p)
                                  }}> {p} </span>
@@ -46,8 +38,15 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
                 }}>next</button>}
         </div>
     )
-
-
 }
 
 export default Paginator
+
+//types
+type PaginatorType = {
+    totalItemsCount: number
+    pageSize: number
+    onPageChanged: (pageNumber: number) => void
+    currentPage: number
+    portionSize: number
+}

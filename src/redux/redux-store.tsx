@@ -5,7 +5,7 @@ import sidebarReducer from "./sidebar-reducer";
 import usersReducer, {UsersActionsTypes} from "./users-reducer";
 import authReducer, {AuthActionsTypes} from "./auth-reducer";
 import thunkMiddleware, {ThunkDispatch} from 'redux-thunk';
-import {reducer, reducer as formReducer} from 'redux-form'
+import {reducer as formReducer} from 'redux-form'
 import appReducer, {AppActionsTypes} from "./app-reducer";
 
 
@@ -24,7 +24,7 @@ let rootReducer = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
-//классическое создание стора с Редакс
+//классическое создание стора с Редакс. Сохранено для информации
 //let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export type ReduxStoreType = ReturnType<typeof rootReducer>

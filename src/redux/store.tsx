@@ -1,6 +1,7 @@
 import profileReducer, {addPostActionCreator} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator} from "./dialogs-reducer";
 
+//OLD FILE. SAVED FOR INFORMATION
 
 /*export type RootStateType = {
     dialogsPage: DialogsPageType

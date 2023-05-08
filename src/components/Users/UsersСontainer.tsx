@@ -5,9 +5,9 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {
     setCurrentPage,
-     follow, unfollow, requestUsers
+    follow, unfollow, requestUsers
 } from "redux/users-reducer";
-import {compose} from "redux";
+
 import {
     getCurrentPage,
     getFollowingInProgress,
@@ -18,7 +18,6 @@ import {
 } from "redux/users-selectors";
 import {UserType} from "api/types";
 
-//ex. UsersAPIComponent (for information)
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
 
     componentDidMount() {
@@ -58,36 +57,10 @@ let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
         followingInProgress: getFollowingInProgress(state)
     }
 }
-//сохранено для информации
-/*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setUsersTotalCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}*/
 
-
-export default compose<React.ComponentType>(
-    connect(mapStateToProps, {
-        setCurrentPage, requestUsers, follow, unfollow
-    })
-)(UsersContainer)
+export default connect(mapStateToProps, {
+    setCurrentPage, requestUsers, follow, unfollow
+})(UsersContainer)
 
 //types
 type MapStatePropsType = {
@@ -98,11 +71,11 @@ type MapStatePropsType = {
     isFetching: boolean
     followingInProgress: Array<number>
 }
-type mapDispatchPropsType = {
+type MapDispatchPropsType = {
     setCurrentPage: (pageNumber: number) => void
     requestUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
 }
 
-export type UsersAPIComponentPropsType = MapStatePropsType & mapDispatchPropsType
+type UsersAPIComponentPropsType = MapStatePropsType & MapDispatchPropsType

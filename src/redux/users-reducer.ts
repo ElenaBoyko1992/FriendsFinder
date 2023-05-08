@@ -1,6 +1,6 @@
-import {followingAPI, usersAPI} from "../api/api";
+import {followingAPI, usersAPI} from "api/api";
 import {AppThunkDispatch} from "./redux-store";
-import {updateObjectInArray} from "../utils/object-helpers";
+import {updateObjectInArray} from "utils/object-helpers";
 import {UserType} from "api/types";
 
 const FOLLOW = 'samurai-network/users/FOLLOW';
@@ -73,53 +73,45 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 export const requestUsers = (page: number, pageSize: number) => async (dispatch: AppThunkDispatch) => {
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(page))
-    let data = await usersAPI.getUsers(page, pageSize)
-
+    try {
+        let data = await usersAPI.getUsers(page, pageSize)
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    } catch (error: any) {
+        alert(error.message ? error.message : 'Some error occurred')
+    }
     dispatch(toggleIsFetching(false))
-    dispatch(setUsers(data.items))
-    dispatch(setTotalUsersCount(data.totalCount))
 }
 
 //функция для избежания дублирования кода в санках follow и unfollow
 const followUnfollowFlow = async (dispatch: AppThunkDispatch, userId: number, apiMethod: typeof followingAPI.follow | typeof followingAPI.unfollow, actionCreator: typeof followSuccess | typeof unfollowSuccess) => {
     dispatch(toggleFollowingProgress(true, userId))
-    let response = await apiMethod(userId)
-    if (response.resultCode === 0) {
-        dispatch(actionCreator(userId))
+    try {
+        let response = await apiMethod(userId)
+        if (response.resultCode === 0) {
+            dispatch(actionCreator(userId))
+        }
+    } catch (error: any) {
+        alert(error.message ? error.message : 'Some error occurred')
     }
+
     dispatch(toggleFollowingProgress(false, userId))
 }
 
 export const follow = (userId: number) => async (dispatch: AppThunkDispatch) => {
     let apiMethod = followingAPI.follow.bind(followingAPI)
-    let actionCreator = followSuccess
 
-    followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+    followUnfollowFlow(dispatch, userId, apiMethod, followSuccess)
 
 }
 
 export const unfollow = (userId: number) => async (dispatch: AppThunkDispatch) => {
     let apiMethod = followingAPI.unfollow.bind(followingAPI)
-    let actionCreator = unfollowSuccess
 
-    followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+    followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess)
 }
 
 //types
-// export type PhotosType = {
-//     small: string | undefined
-//     large: string | undefined
-// }
-
-// export type UserType = {
-//     id: number
-//     photos: PhotosType
-//     followed: boolean
-//     name: string
-//     status: string
-//     location: { city: string, country: string }
-// }
-
 export type UsersPageType = {
     users: Array<UserType>
     pageSize: number

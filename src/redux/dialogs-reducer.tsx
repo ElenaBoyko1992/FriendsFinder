@@ -24,7 +24,7 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsAc
         case SEND_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: 3, message: action.newMessageBody}]
+                messages: [...state.messages, {id: Math.random(), message: action.newMessageBody}]
             }
         default:
             return state;
@@ -43,9 +43,9 @@ type MessagesType = {
     id: number
     message: string
 }
-export type DialogsActionsTypes =
-    | ReturnType<typeof sendMessageCreator>
-export type DialogsPageType = typeof initialState
 
+export type DialogsActionsTypes = ReturnType<typeof sendMessageCreator>
+
+export type DialogsPageType = typeof initialState
 
 export default dialogsReducer;

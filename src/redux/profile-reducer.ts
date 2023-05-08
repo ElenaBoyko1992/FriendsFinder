@@ -1,4 +1,4 @@
-import {profileAPI} from "../api/api";
+import {profileAPI} from "api/api";
 import {AppThunkDispatch, ReduxStoreType} from "./redux-store";
 import {stopSubmit} from "redux-form";
 import {ProfileType} from "api/types";
@@ -19,7 +19,6 @@ let initialState = {
     profile: null,
     status: ''
 }
-
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes): ProfilePageType => {
     switch (action.type) {
@@ -54,7 +53,6 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         default:
             return state;
     }
-
 }
 
 //AC
@@ -80,46 +78,60 @@ export const savePhotoSuccess = (photos: any) => {
     return {type: SAVE_PHOTO_SUCCESS, photos} as const
 }
 
-
 //thunks
 export const getUserProfile = (userId: number) => async (dispatch: AppThunkDispatch) => {
-    let response = await profileAPI.getUserProfileData(userId)
-
-    dispatch(setUserProfile(response.data))
+    try {
+        let response = await profileAPI.getUserProfileData(userId)
+        dispatch(setUserProfile(response.data))
+    } catch (error: any) {
+        alert(error.message ? error.message : 'Some error occurred')
+    }
 }
 
 export const getStatus = (userId: number) => async (dispatch: AppThunkDispatch) => {
-    let res = await profileAPI.getStatus(userId)
-    dispatch(setStatus(res.data))
+    try {
+        let res = await profileAPI.getStatus(userId)
+        dispatch(setStatus(res.data))
+    } catch (error: any) {
+        alert(error.message ? error.message : 'Some error occurred')
+    }
+
 }
 export const updateStatus = (status: string) => async (dispatch: AppThunkDispatch) => {
-    let res = await profileAPI.updateStatus(status)
-
-    if (res.data.resultCode === 0) {
-        dispatch(setStatus(status))
+    try {
+        let res = await profileAPI.updateStatus(status)
+        if (res.data.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
+    } catch (error: any) {
+        alert(error.message ? error.message : 'Some error occurred')
     }
 }
 export const savePhoto = (file: any) => async (dispatch: AppThunkDispatch) => {
-    let res = await profileAPI.savePhoto(file)
-
-    if (res.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(res.data.data.photos))
+    try {
+        let res = await profileAPI.savePhoto(file)
+        if (res.data.resultCode === 0) {
+            dispatch(savePhotoSuccess(res.data.data.photos))
+        }
+    } catch (error: any) {
+        alert(error.message ? error.message : 'Some error occurred')
     }
 }
 export const saveProfile = (profile: ProfileType) => async (dispatch: AppThunkDispatch, getState: () => ReduxStoreType) => {
     const userId = getState().auth.userId;
-    let res = await profileAPI.saveProfile(profile)
-
-    if (res.data.resultCode === 0) {
-        if (userId) {
-            dispatch(getUserProfile(userId))
+    try {
+        let res = await profileAPI.saveProfile(profile)
+        if (res.data.resultCode === 0) {
+            if (userId) {
+                dispatch(getUserProfile(userId))
+            }
+        } else {
+            dispatch(stopSubmit('edit-profile', {_error: res.data.messages[0]}))
+            return Promise.reject(res.data.messages[0])
         }
-
-    } else {
-        dispatch(stopSubmit('edit-profile', {_error: res.data.messages[0]}))
-        return Promise.reject(res.data.messages[0])
+    } catch (error: any) {
+        alert(error.message ? error.message : 'Some error occurred')
     }
-
 }
 
 //types
@@ -129,16 +141,6 @@ type PostsType = {
     likesAmount: number
 }
 
-//old uncorrect type
-// export type ProfileType = {
-//     aboutMe?: string
-//     contacts?: any
-//     fullName?: string
-//     lookingForAJob?: boolean
-//     lookingForAJobDescription?: string
-//     userId?: number
-//     photos?: any
-// }
 export type ProfilePageType = {
     posts: Array<PostsType>
     profile: ProfileType | null

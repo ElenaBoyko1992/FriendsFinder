@@ -1,29 +1,13 @@
 import React, {FC} from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, Input} from "../common/FormsControls/FormsControls";
-import {required} from "../../utils/validators/validators";
+import {required} from "utils/validators/validators";
 import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
+import {login} from "redux/auth-reducer";
 import {Redirect} from "react-router-dom";
-import {ReduxStoreType} from "../../redux/redux-store";
+import {ReduxStoreType} from "redux/redux-store";
 import style from '../common/FormsControls/FormsControls.module.css'
 
-
-type FormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha: string | null
-}
-type LoginPropsType = MapStatePropsType & MapDispatchPropsType
-
-type MapStatePropsType = {
-    captchaUrl: string | null
-    isAuth: boolean
-}
-type MapDispatchPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
-}
 const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
@@ -48,8 +32,6 @@ const LoginForm: FC<InjectedFormProps<FormDataType, LoginReduxFormType> & LoginR
                                                                                                      handleSubmit,
                                                                                                      captchaUrl
                                                                                                  }) => {
-
-        console.log(error)
         return (
             <form onSubmit={handleSubmit}>
                 {createField('Email', 'email', [required], Input)}
@@ -85,3 +67,17 @@ export default connect(mapStateToProps, {login})(Login);
 type LoginReduxFormType = {
     captchaUrl: string | null
 }
+type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string | null
+}
+type MapStatePropsType = {
+    captchaUrl: string | null
+    isAuth: boolean
+}
+type MapDispatchPropsType = {
+    login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
+}
+type LoginPropsType = MapStatePropsType & MapDispatchPropsType

@@ -3,11 +3,11 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {MyPostsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {maxLengthCreator, required} from "utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
 const MyPosts = React.memo((props: MyPostsType) => {
-    console.log('MyPosts')
+
     let postsElements = props.posts.map(p => <Post message={p.message} likesAmount={p.likesAmount} key={p.id}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>(); //ссылка на textarea
 

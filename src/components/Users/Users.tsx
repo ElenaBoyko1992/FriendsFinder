@@ -4,18 +4,6 @@ import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
 import {UserType} from "api/types";
 
-
-export type UsersPropsType = {
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    users: Array<UserType>
-    followingInProgress: Array<number>
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-}
-
 let Users = ({
                  currentPage,
                  totalUsersCount,
@@ -41,3 +29,15 @@ let Users = ({
 }
 
 export default Users
+
+//types
+export type UsersPropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    users: Array<UserType>
+    followingInProgress: Array<number>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
