@@ -1,29 +1,15 @@
 import React, {FC} from "react";
 import {createField, Input, Textarea} from "components/common/FormsControls/FormsControls";
-import {Form, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import s from './ProfileInfo.module.css';
 import style from '../../common/FormsControls/FormsControls.module.css'
 import {ProfileType} from "api/types";
-
-type FieldFromType = ProfileType
-//     {
-//     fullName: string
-//     lookingForAJob: string
-//     lookingForAJobDescription: string
-//     aboutMe: string
-// }
-
-type OtherFormProps = {
-    initialValues: any
-    profile: ProfileType
-}
 
 const ProfileDataForm: FC<InjectedFormProps<FieldFromType, OtherFormProps> & OtherFormProps> = ({
                                                                                                     profile,
                                                                                                     handleSubmit,
                                                                                                     error
                                                                                                 }) => {
-
     return <form onSubmit={handleSubmit}>
         <div>
             <button>save</button>
@@ -60,3 +46,11 @@ const ProfileDataForm: FC<InjectedFormProps<FieldFromType, OtherFormProps> & Oth
 const ProfileDataFormReduxForm = reduxForm<FieldFromType, OtherFormProps>({form: 'edit-profile'})(ProfileDataForm)
 
 export default ProfileDataFormReduxForm
+
+//types
+type FieldFromType = ProfileType
+
+type OtherFormProps = {
+    initialValues: any
+    profile: ProfileType
+}

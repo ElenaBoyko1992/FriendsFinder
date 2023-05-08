@@ -67,7 +67,7 @@ export const setUserProfile = (profile: ProfileType) => {
         profile
     } as const
 }
-export const setStatus = (status: string | null) => {
+export const setStatus = (status: string) => {
     return {
         type: SET_STATUS,
         status
@@ -142,7 +142,7 @@ type PostsType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     profile: ProfileType | null
-    status: string | null
+    status: string
 }
 
 export type ProfileActionsTypes =

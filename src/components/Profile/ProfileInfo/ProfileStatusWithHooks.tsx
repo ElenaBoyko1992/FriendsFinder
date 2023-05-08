@@ -1,14 +1,11 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import s from './ProfileInfo.module.css';
 
-
-const ProfileStatusWithHooks = (props: any) => {
+const ProfileStatusWithHooks = (props: ProfileStatusWithHooksType) => {
 
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status)
 
     useEffect(() => {
-
         setStatus(props.status)
     }, [props.status])
 
@@ -39,3 +36,9 @@ const ProfileStatusWithHooks = (props: any) => {
 }
 
 export default ProfileStatusWithHooks;
+
+//types
+type ProfileStatusWithHooksType = {
+    status: string
+    updateStatus: (status: string) => void
+}

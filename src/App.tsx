@@ -32,18 +32,16 @@ class App extends React.Component<AppPropsType> {
                     <Suspense fallback={<Preloader/>}>
 
                         <Switch>
-                            {/* <Route path={'/dialogs'} component={Dialogs}/> применять при передаче компоненты без пропсов
-                    <Route path={'/profile'} component={Profile}/> применять при передаче компоненты без пропсов*/}
                             <Route exact path={'/'}
                                    render={() =>
-                                       <Redirect to={'/profile'}/>}/> {/*применять при передаче компоненты c пропсами*/}
-                            <Route path={'/dialogs'}
-                                   render={() =>
-                                       <DialogsContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
+                                       <Redirect to={'/profile'}/>}/>
                             <Route
                                 path={'/profile/:userId?'} //указываем, что в адресе после profile может также прийти userId.
                                 //"?" указывает на то, что параметр :userId является опциональным
-                                render={() => <ProfileContainer/>}/> {/*применять при передаче компоненты c пропсами*/}
+                                render={() => <ProfileContainer/>}/>
+                            <Route path={'/dialogs'}
+                                   render={() =>
+                                       <DialogsContainer/>}/>
                             <Route path={'/users'}
                                    render={() => <UsersContainer/>}/>
                             <Route path={'/login'}
@@ -54,14 +52,12 @@ class App extends React.Component<AppPropsType> {
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>*/}
                         </Switch>
-
                     </Suspense>
                 </div>
             </div>
 
         );
     }
-
 }
 
 const mapStateToProps = (state: ReduxStoreType): MapStatePropsType => ({
@@ -80,6 +76,7 @@ const SamuraiJSApp = () => {
     </HashRouter>
 }
 export default SamuraiJSApp;
+
 //types
 type MapStatePropsType = {
     initialized: boolean

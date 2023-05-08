@@ -1,9 +1,10 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {PropsType} from "./ProfileContainer";
+import {ProfileContainerPropsType} from "components/Profile/ProfileContainer";
 
-const Profile = (props: PropsType) => {
+
+const Profile = (props: ProfileContainerPropsType & { isOwner: boolean }) => {
 
     return (
         <div>

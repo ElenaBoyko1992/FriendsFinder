@@ -8,32 +8,14 @@ import {RouteComponentProps} from "react-router";
 import {compose} from "redux";
 import {ProfileType} from "api/types";
 
-
-export type  ProfileMapStatePropsType = {
-    profile: null | undefined | ProfileType
-    status: string | null
-    autorizedUserId: any
-    isAuth: boolean
-};
-type  MapDispatchPropsType = {
-    getUserProfile: (userId: string) => void
-    getStatus: (userId: string | undefined) => void
-    updateStatus: (status: string) => void
-    savePhoto: (file: any) => void
-    saveProfile: (profile: ProfileType) => Promise<any>
-}
-type ProfileContainerPropsType = ProfileMapStatePropsType & MapDispatchPropsType
-
-type DataFromWithRouterType = {
-    userId?: string
-}
-export type PropsType = RouteComponentProps<DataFromWithRouterType> & ProfileContainerPropsType & { isOwner: boolean }
-
-
-class ProfileContainer extends React.Component<PropsType> {
+class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
     refreshProfile() {
-        let userId = this.props.match.params.userId
+        let userId
+        if (this.props.match.params.userId) {
+            userId = +this.props.match.params.userId
+        }
+
         if (!userId) {
             userId = this.props.autorizedUserId
             if (!userId) {
@@ -47,16 +29,13 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     componentDidMount() {
-
         this.refreshProfile();
-
     }
 
-    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+    componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>, prevState: Readonly<{}>, snapshot?: any) {
         if (this.props.match.params.userId != prevProps.match.params.userId) {
             this.refreshProfile();
         }
-
     }
 
     render() {
@@ -80,3 +59,26 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter,
 )(ProfileContainer)
+
+//types
+type  ProfileMapStatePropsType = {
+    profile: null | ProfileType
+    status: string
+    autorizedUserId: number | null
+    isAuth: boolean
+};
+type  MapDispatchPropsType = {
+    getUserProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus: (status: string) => void
+    savePhoto: (file: any) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+}
+
+type DataFromWithRouterType = {
+    userId?: string
+}
+export type ProfileContainerPropsType =
+    RouteComponentProps<DataFromWithRouterType>
+    & ProfileMapStatePropsType
+    & MapDispatchPropsType

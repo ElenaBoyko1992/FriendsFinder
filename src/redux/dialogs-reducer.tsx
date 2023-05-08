@@ -15,6 +15,7 @@ let initialState = {
         {id: 3, message: 'Yo'},
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'},
+        {id: 6, message: 'Hey'},
     ] as Array<MessagesType>
 }
 
