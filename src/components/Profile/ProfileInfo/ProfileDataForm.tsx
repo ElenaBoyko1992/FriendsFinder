@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {createField, Input, Textarea} from "components/common/FormsControls/FormsControls";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import s from './ProfileInfo.module.css';
+import commonStyles from '../../common/CommonStyles.module.css';
 import style from '../../common/FormsControls/FormsControls.module.css'
 import {ProfileType} from "api/types";
 
@@ -11,9 +12,7 @@ const ProfileDataForm: FC<InjectedFormProps<FieldFromType, OtherFormProps> & Oth
                                                                                                     error
                                                                                                 }) => {
     return <form onSubmit={handleSubmit}>
-        <div>
-            <button>save</button>
-        </div>
+
         {error && <div className={style.formSummaryError}>
             {error}
         </div>}
@@ -38,6 +37,9 @@ const ProfileDataForm: FC<InjectedFormProps<FieldFromType, OtherFormProps> & Oth
                 <b>{key}: {createField(key, 'contacts.' + key, [], Input)}</b>
             </div>
         })}
+        </div>
+        <div>
+            <button className={commonStyles.button}>save</button>
         </div>
     </form>
 }

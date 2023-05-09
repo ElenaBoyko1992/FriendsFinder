@@ -1,30 +1,31 @@
 import s from "components/Profile/ProfileInfo/ProfileInfo.module.css";
+import commonStyles from "components/common/CommonStyles.module.css";
 import React from "react";
 import {ProfileType} from "api/types";
 
 export const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataType) => {
-    return <div>
-        <div>
-            {isOwner && <button onClick={goToEditMode}>edit</button>}
-        </div>
-        <div>
+    return <div className={s.userData}>
+        <div className={s.userDataRow}>
             <b>Full name</b>: {profile.fullName}
         </div>
-        <div>
+        <div className={s.userDataRow}>
             <b>Looking for a job</b>: {profile.lookingForAJob ? 'yes' : 'no'}
         </div>
         {profile.lookingForAJob &&
-            <div>
+            <div className={s.userDataRow}>
                 <b>My professional skills</b>: {profile.lookingForAJobDescription}
             </div>}
-        <div>
+        <div className={s.userDataRow}>
             <b>About me</b>: {profile.aboutMe}
         </div>
-        <div>
+        <div className={s.userDataRow}>
             <b>Contacts</b>: {Object.keys(profile.contacts).map((key) => {
             return <Contact key={key} contactTitle={key}
                             contactValue={profile.contacts[key as keyof typeof profile.contacts]}/>
         })}
+            <div>
+                {isOwner && <button onClick={goToEditMode} className={commonStyles.button}>edit</button>}
+            </div>
         </div>
     </div>
 }

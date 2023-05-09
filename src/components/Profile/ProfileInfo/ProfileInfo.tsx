@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
+import commonStyles from '../../common/CommonStyles.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/defaultAvatar.png";
@@ -32,8 +33,10 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
     return (
         <div>
             <div className={s.descriptionBlock}>
-                <img src={profile.photos?.large || userPhoto} alt={''} className={s.mainPhoto}/>
-                {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+                {/*<img src={profile.photos?.large || userPhoto} alt={''} className={s.mainPhoto}/>*/}
+                <div>
+                    {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
+                </div>
 
                 {editMode ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> :
                     <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
