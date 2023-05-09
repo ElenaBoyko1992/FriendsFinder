@@ -38,7 +38,7 @@ const ProfileDataForm: FC<InjectedFormProps<FieldFromType, OtherFormProps> & Oth
             </div>
         })}
         </div>
-        <div>
+        <div className={s.buttonWrapper}>
             <button className={commonStyles.button}>save</button>
         </div>
     </form>

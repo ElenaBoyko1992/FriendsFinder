@@ -17,12 +17,6 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
         return <Preloader/>
     }
 
-    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files?.length) {
-            savePhoto(e.target.files[0]);
-        }
-    }
-
     const onSubmit = (formData: ProfileType) => {
         saveProfile(formData).then(
             () => {
@@ -34,9 +28,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
         <div>
             <div className={s.descriptionBlock}>
                 {/*<img src={profile.photos?.large || userPhoto} alt={''} className={s.mainPhoto}/>*/}
-                <div>
-                    {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
-                </div>
+
 
                 {editMode ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> :
                     <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
