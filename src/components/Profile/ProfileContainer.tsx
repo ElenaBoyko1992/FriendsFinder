@@ -7,6 +7,7 @@ import {ReduxStoreType} from "redux/redux-store";
 import {RouteComponentProps} from "react-router";
 import {compose} from "redux";
 import {ProfileType} from "api/types";
+import {withAuthRedirect} from "hoc/withAuthRedirect";
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
@@ -58,6 +59,7 @@ const mapStateToProps = (state: ReduxStoreType): ProfileMapStatePropsType => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter,
+    withAuthRedirect
 )(ProfileContainer)
 
 //types

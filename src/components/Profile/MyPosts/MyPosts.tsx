@@ -4,23 +4,11 @@ import Post from "./Post/Post";
 import {MyPostsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "utils/validators/validators";
-import {Textarea} from "../../common/FormsControls/FormsControls";
+import {createField, Textarea} from "../../common/FormsControls/FormsControls";
 
 const MyPosts = React.memo((props: MyPostsType) => {
 
     let postsElements = props.posts.map(p => <Post message={p.message} likesAmount={p.likesAmount} key={p.id}/>)
-    let newPostElement = React.createRef<HTMLTextAreaElement>(); //ссылка на textarea
-
-    // let onAddPost = () => {
-    //     props.addPost();
-    // }
-    //
-    // let onPostChange = () => {
-    //     if (newPostElement.current) {
-    //         let text = newPostElement.current.value;
-    //         props.updateNewPostText(text)
-    //     }
-    // }
 
     const addPost = (values: AddPostValueType) => {
         props.addPost(values.newPostText);
@@ -43,8 +31,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<AddPostValueType>> = (props) =>
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Enter your message'} component={Textarea} name={'newPostText'}
-                       validate={[required, maxLength10]}/>
+                {createField('Enter your message', 'newPostText', [required, maxLength10], Textarea)}
             </div>
             <div>
                 <button>Add post</button>

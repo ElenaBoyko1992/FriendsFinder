@@ -17,6 +17,9 @@ import {
     getUsers
 } from "redux/users-selectors";
 import {UserType} from "api/types";
+import {compose} from "redux";
+import {withAuthRedirect} from "hoc/withAuthRedirect";
+import Dialogs from "components/Dialogs/Dialogs";
 
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
 
@@ -58,10 +61,11 @@ let mapStateToProps = (state: ReduxStoreType): MapStatePropsType => {
     }
 }
 
-export default connect(mapStateToProps, {
-    setCurrentPage, requestUsers, follow, unfollow
-})(UsersContainer)
-
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setCurrentPage, requestUsers, follow, unfollow
+    }),
+    withAuthRedirect)(UsersContainer)
 //types
 type MapStatePropsType = {
     users: Array<UserType>
