@@ -1,24 +1,33 @@
 .profile {
     padding: 20px;
-    display: flex;
+
 }
 
 .descriptionBlock {
-
+    display: flex;
+    border-bottom: 1px solid #f1f2f2;
+    margin-bottom: 20px;
 }
 
 .mainPhoto {
     width: 250px;
     margin-bottom: 20px;
     margin-right: 30px;
+
+}
+
+.buttonFile{
+    margin-bottom: 15px;
 }
 
 .mainPhoto img {
     width: 100%;
 }
 
+.userInfo {
+    width: 100%;
 
-.userData {
+    padding-bottom: 20px;
 }
 
 .userDataRow {
@@ -29,6 +38,6 @@
     padding: 3px 0 3px 30px;
 }
 
-.buttonWrapper{
+.buttonWrapper {
     margin-top: 7px;
 }

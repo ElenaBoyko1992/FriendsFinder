@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './MyPosts.module.css';
+import commonStyles from '../../common/CommonStyles.module.css';
 import Post from "./Post/Post";
 import {MyPostsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
@@ -16,7 +17,7 @@ const MyPosts = React.memo((props: MyPostsType) => {
 
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
+            <h3>Posts</h3>
             <AddPostFormRedux onSubmit={addPost}/>
             <div className={s.posts}>
                 {postsElements}
@@ -25,17 +26,18 @@ const MyPosts = React.memo((props: MyPostsType) => {
     )
 })
 
-const maxLength10 = maxLengthCreator(10);
+const maxLength100 = maxLengthCreator(100);
 
 const AddNewPostForm: React.FC<InjectedFormProps<AddPostValueType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                {createField('Enter your message', 'newPostText', [required, maxLength10], Textarea)}
+            <div className={s.textarea}>
+                {createField('Enter your message', 'newPostText', [required, maxLength100], Textarea)}
             </div>
             <div>
-                <button>Add post</button>
+                <button className={`${commonStyles.button} ${s.button}`}>Add post</button>
             </div>
+
         </form>
 
     )

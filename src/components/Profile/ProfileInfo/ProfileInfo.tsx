@@ -16,7 +16,11 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
     if (!profile) {
         return <Preloader/>
     }
-
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.length) {
+            savePhoto(e.target.files[0]);
+        }
+    }
     const onSubmit = (formData: ProfileType) => {
         saveProfile(formData).then(
             () => {
@@ -27,13 +31,20 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
     return (
         <div>
             <div className={s.descriptionBlock}>
-                {/*<img src={profile.photos?.large || userPhoto} alt={''} className={s.mainPhoto}/>*/}
+                <div className={s.mainPhoto}>
+                    <div>
+                        <img src={profile?.photos?.large || userPhoto} alt={''}/>
+                    </div>
+                    <div>
+                        {isOwner && <input type="file" onChange={onMainPhotoSelected} className={s.buttonFile}/>}
+                    </div>
+                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                </div>
+                <div className={s.userInfo}>
+                    {editMode ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> :
+                        <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
 
-
-                {editMode ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> :
-                    <ProfileData goToEditMode={() => setEditMode(true)} profile={profile} isOwner={isOwner}/>}
-
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                </div>
             </div>
         </div>
     )

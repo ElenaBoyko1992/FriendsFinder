@@ -11,10 +11,10 @@ const SAVE_PHOTO_SUCCESS = 'samurai-network/SAVE_PHOTO_SUCCESS';
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesAmount: 5},
-        {id: 2, message: 'Hi, its my first post', likesAmount: 11},
-        {id: 3, message: 'Blabla', likesAmount: 11},
-        {id: 4, message: 'Dada', likesAmount: 11},
+        {id: 1, message: 'Hi, its my first post', likesAmount: 5},
+        {id: 2, message: 'Hi, how are you?', likesAmount: 11},
+        {id: 3, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ipsam, quo. Adipisci, dignissimos, quia? Assumenda consectetur quia rerum unde veniam? Aliquid cum doloribus esse eum ipsam itaque rem sapiente voluptas!', likesAmount: 11},
+        {id: 4, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem consectetur delectus dignissimos, dolorum ea earum id illum inventore laborum modi neque odio quasi, quia repellat similique tempora voluptatibus. Totam, vero.', likesAmount: 10},
     ],
     profile: null,
     status: ''

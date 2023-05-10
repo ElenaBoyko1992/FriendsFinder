@@ -7,19 +7,19 @@ import s from "components/Profile/ProfileInfo/ProfileInfo.module.css";
 
 
 const Profile = (props: ProfileContainerPropsType & { isOwner: boolean }) => {
-    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files?.length) {
-            props.savePhoto(e.target.files[0]);
-        }
-    }
+
+
+
+
+
     return (
         <div className={s.profile}>
-            <div className={s.mainPhoto}>
-                <img src={props.profile?.photos?.large || userPhoto} alt={''}/>
-                <div>
-                    {props.isOwner && <input type="file" onChange={onMainPhotoSelected} />}
-                </div>
-            </div>
+            {/*<div className={s.mainPhoto}>*/}
+            {/*    <img src={props.profile?.photos?.large || userPhoto} alt={''}/>*/}
+            {/*    <div>*/}
+            {/*        {props.isOwner && <input type="file" onChange={onMainPhotoSelected} />}*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div>
                 <ProfileInfo savePhoto={props.savePhoto} profile={props.profile} status={props.status}
                              updateStatus={props.updateStatus} isOwner={props.isOwner} saveProfile={props.saveProfile}/>

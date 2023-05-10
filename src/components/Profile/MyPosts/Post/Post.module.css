@@ -1,9 +1,27 @@
 
 .item {
-    color: yellowgreen;
+    color: #6d6e71;
+    margin-bottom: 20px;
+    width: 70%;
 }
 .item img {
+    display: inline-block;
     width: 50px;
     height: 50px;
     border-radius: 30px;
+    margin-right: 10px;
+}
+
+.like {
+    position: relative;
+    padding: 7px 0 0 20px;
+}
+
+.like::before {
+    content: '♡';
+    font-size: 25px;
+    position: absolute;
+    top: -3px;
+    left: 0;
+    font-weight: 700;
 }

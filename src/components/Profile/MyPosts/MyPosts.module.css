@@ -2,6 +2,23 @@
     padding: 10px;
 }
 
+.postsBlock h3{
+font-weight: 700;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.textarea {
+margin-bottom: 7px;
+}
+
+.button {
+    margin-bottom: 20px;
+}
+
 .posts {
     margin-top: 10px;
 }
+
+
+
