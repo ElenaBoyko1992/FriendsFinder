@@ -1,13 +1,35 @@
 .paginator {
-    margin: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button {
+    background: none;
+    border: none;
+    height: 40px;
+    cursor: pointer;
+}
+
+.button img {
+    height: 100%;
+
 }
 
 .pageNumber {
-    padding: 2px;
-    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 }
 
 .pageNumber.selectedPage {
     font-weight: bold;
-    border-color: black;
+    border: 1px solid #27aae1;
+    border-radius: 50%;
+    background-color: #27aae1;
+    color: #ffffff;
 }

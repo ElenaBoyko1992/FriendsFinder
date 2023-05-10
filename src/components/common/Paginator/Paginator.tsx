@@ -1,5 +1,10 @@
 import React, {useState} from "react";
 import s from "./Paginator.module.css";
+import commonStyles from "../CommonStyles.module.css";
+import leftArrow from "../../../assets/images/left-arrow-svgrepo-com.svg";
+import leftGreyArrow from "../../../assets/images/left-gray-arrow-svgrepo-com.svg";
+import rightArrow from "../../../assets/images/right-arrow-svgrepo-com.svg";
+import rightGreyArrow from "../../../assets/images/right-gray-arrow-svgrepo-com.svg";
 
 const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize}: PaginatorType) => {
 
@@ -17,10 +22,10 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
 
     return (
         <div className={s.paginator}>
-            {portionNumber > 1 &&
-                <button onClick={() => {
-                    setPortionNumber(portionNumber - 1)
-                }}>prev</button>}
+
+            <button onClick={() => {
+                setPortionNumber(portionNumber - 1)
+            }} className={s.button}><img src={portionNumber > 1 ? leftArrow : leftGreyArrow} alt=""/></button>
 
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -32,10 +37,11 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
                                  }}> {p} </span>
                 })
             }
-            {portionCount > portionNumber &&
-                <button onClick={() => {
-                    setPortionNumber(portionNumber + 1)
-                }}>next</button>}
+
+            <button onClick={() => {
+                setPortionNumber(portionNumber + 1)
+            }} className={s.button}><img src={portionCount > portionNumber ? rightArrow : rightGreyArrow} alt=""/>
+            </button>
         </div>
     )
 }

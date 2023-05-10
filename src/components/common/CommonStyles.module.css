@@ -14,3 +14,8 @@
     background: #ffffff;
     color: #27aae1;
 }
+.textarea {
+    width: 350px;
+    height: 100px;
+    padding: 5px 10px;
+}

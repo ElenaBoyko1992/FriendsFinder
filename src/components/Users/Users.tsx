@@ -1,8 +1,8 @@
 import React from "react";
-
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
 import {UserType} from "api/types";
+import s from './users.module.css'
 
 let Users = ({
                  currentPage,
@@ -16,7 +16,7 @@ let Users = ({
                  ...props
              }: UsersPropsType) => {
 
-    return <div>
+    return <div className={s.usersPage}>
         <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize}
                    totalItemsCount={totalUsersCount} portionSize={10}/>
         <div>

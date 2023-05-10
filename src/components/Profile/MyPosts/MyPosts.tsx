@@ -3,7 +3,7 @@ import s from './MyPosts.module.css';
 import commonStyles from '../../common/CommonStyles.module.css';
 import Post from "./Post/Post";
 import {MyPostsType} from "./MyPostsContainer";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "utils/validators/validators";
 import {createField, Textarea} from "../../common/FormsControls/FormsControls";
 
@@ -31,8 +31,8 @@ const maxLength100 = maxLengthCreator(100);
 const AddNewPostForm: React.FC<InjectedFormProps<AddPostValueType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div className={s.textarea}>
-                {createField('Enter your message', 'newPostText', [required, maxLength100], Textarea)}
+            <div className={s.textareaWrapper}>
+                {createField('Enter your message', 'newPostText', [required, maxLength100], Textarea, {}, '', `${commonStyles.textarea}`)}
             </div>
             <div>
                 <button className={`${commonStyles.button} ${s.button}`}>Add post</button>

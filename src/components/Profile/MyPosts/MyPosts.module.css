@@ -2,14 +2,14 @@
     padding: 10px;
 }
 
-.postsBlock h3{
-font-weight: 700;
+.postsBlock h3 {
+    font-weight: 700;
     display: block;
     margin-bottom: 15px;
 }
 
-.textarea {
-margin-bottom: 7px;
+.textareaWrapper {
+    margin-bottom: 7px;
 }
 
 .button {
