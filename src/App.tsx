@@ -10,7 +10,7 @@ import {compose} from "redux";
 import {initializeApp} from "redux/app-reducer";
 import store, {ReduxStoreType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
-
+import s from '../src/components/common/CommonStyles.module.css'
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
@@ -47,7 +47,7 @@ class App extends React.Component<AppPropsType> {
                             <Route path={'/login'}
                                    render={() => <LoginPage/>}/>
                             <Route path={'*'}
-                                   render={() => <div>404 NOT FOUND</div>}/>
+                                   render={() => <div className={s.notFoundPage}>404 NOT FOUND</div>}/>
                             {/*                    <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>*/}

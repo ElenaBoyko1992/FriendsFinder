@@ -10,12 +10,20 @@
     border: 2px solid #27aae1;
     transition: all 0.2s ease;
 }
+
 .button:hover {
     background: #ffffff;
     color: #27aae1;
 }
+
 .textarea {
     width: 350px;
     height: 100px;
     padding: 5px 10px;
+}
+
+.notFoundPage {
+    margin: 20px;
+    font-size: 20px;
+    color: red;
 }

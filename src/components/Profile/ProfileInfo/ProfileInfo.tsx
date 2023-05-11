@@ -31,8 +31,8 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
     return (
         <div>
             <div className={s.descriptionBlock}>
-                <div className={s.mainPhoto}>
-                    <div>
+                <div className={s.mainPhotoBlock}>
+                    <div className={s.mainPhoto}>
                         <img src={profile?.photos?.large || userPhoto} alt={''}/>
                     </div>
                     <div>

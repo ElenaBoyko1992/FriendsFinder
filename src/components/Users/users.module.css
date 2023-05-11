@@ -2,8 +2,49 @@
     padding: 35px;
 }
 
-.userPhoto {
-    width: 100px;
-    height: 100px;
+.users {
+    display: flex;
+    flex-wrap: wrap;
+
 }
 
+.user {
+    border: 1px solid #f1f2f2;
+    padding: 10px 20px;
+    margin: 0 10px 20px 10px;
+    flex-basis: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.userPhoto {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+}
+
+.name {
+    margin-bottom: 5px;
+}
+
+.button {
+    background: #27aae1;
+    padding: 5px 0;
+    width: 93px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    border-radius: 30px;
+    border: 2px solid #27aae1;
+
+}
+
+.button:disabled {
+    background: grey;
+    border-color: grey;
+    color: darkgrey;
+
+}
