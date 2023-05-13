@@ -7,6 +7,8 @@ import {login} from "redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {ReduxStoreType} from "redux/redux-store";
 import style from '../common/FormsControls/FormsControls.module.css'
+import s from './Login.module.css'
+import commonStyles from '../common/CommonStyles.module.css'
 
 const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
@@ -18,7 +20,7 @@ const Login = (props: LoginPropsType) => {
     }
 
     return (
-        <div>
+        <div className={s.login}>
             <h1>
                 Login
             </h1>
@@ -36,7 +38,11 @@ const LoginForm: FC<InjectedFormProps<FormDataType, LoginReduxFormType> & LoginR
             <form onSubmit={handleSubmit}>
                 {createField('Email', 'email', [required], Input)}
                 {createField('Password', 'password', [required], Input, {type: 'password'})}
-                {createField(null, 'rememberMe', [], Input, {type: 'checkbox'}, 'remember me')}
+                <div className={s.rememberMe}>
+                    {createField(null, 'rememberMe', [], Input, {type: 'checkbox'})}
+                    <span>remember me</span>
+                </div>
+
 
                 {captchaUrl && <img src={captchaUrl}/>}
                 {captchaUrl && createField('Symbols from image', 'captcha', [required], Input)}
@@ -45,7 +51,7 @@ const LoginForm: FC<InjectedFormProps<FormDataType, LoginReduxFormType> & LoginR
                     {error}
                 </div>}
                 <div>
-                    <button>Login</button>
+                    <button className={commonStyles.button}>Login</button>
                 </div>
             </form>
         );

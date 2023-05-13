@@ -14,12 +14,12 @@ const Header = (props: HeaderPropsType) => {
                 <span>Friends Finder</span>
             </div>
             <div className={s.loginBlock}>
-                {props.isAuth ?
+                {props.isAuth &&
                     <div>
                         <span>{props.login}</span>
                         <button onClick={props.logout} className={commonStyles.button}>Log out</button>
                     </div>
-                    : <NavLink to={'/login'}>Login</NavLink>}
+                }
                 {/*{props.isAuth && <img src={props.userAvatar || userPhoto} alt=""/>}*/}
             </div>
 

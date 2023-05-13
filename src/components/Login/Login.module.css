@@ -1,0 +1,28 @@
+.login {
+    margin: 30px;
+}
+
+.login h1 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.login input {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.rememberMe {
+    display: flex;
+}
+
+.rememberMe {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.rememberMe span {
+    margin: 0 0 10px 10px;
+}
