@@ -1,17 +1,49 @@
 .nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
     grid-area: n;
-    padding: 20px;
-
+    display: flex;
+    background-color: #ffffff;
+    z-index: 2;
 }
 
-.item a{
+.items {
+    padding: 80px 20px 20px 20px;
+    display: none;
+}
+
+.activeItems {
+    display: block;
+}
+
+
+.item a {
     display: block;
     color: #6d6e71;
     text-decoration: none;
-    padding: 15px 10px;
+    padding: 15px 60px 15px 10px;
     border-bottom: 1px solid #f1f2f2;
 }
 
 .item a.activeLink {
     color: #27aae1;
+}
+
+.button {
+    background-color: #f1f2f2;
+    border: 1px solid #c2bebe;
+    width: 20px;
+    display: none;
+}
+
+@media screen and (max-width: 400px) {
+    .button {
+        display: block;
+    }
+
+    .item a {
+        padding: 15px 40px 15px 10px;
+    }
+
 }

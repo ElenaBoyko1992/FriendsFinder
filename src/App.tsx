@@ -11,6 +11,7 @@ import {initializeApp} from "redux/app-reducer";
 import store, {ReduxStoreType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
 import s from '../src/components/common/CommonStyles.module.css'
+
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
@@ -28,6 +29,7 @@ class App extends React.Component<AppPropsType> {
             <div className={'app-wrapper'}>
                 <HeaderContainer/>
                 <Navbar/>
+
                 <div className={'app-wrapper-content'}>
                     <Suspense fallback={<Preloader/>}>
 

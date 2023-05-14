@@ -8,21 +8,22 @@ import {HeaderPropsType} from "./HeaderContainer";
 const Header = (props: HeaderPropsType) => {
 
     return (
-        <header className={s.header}>
-            <div className={s.logo}>
-                <img src={logo} alt=""/>
-                <span>Friends Finder</span>
+        <header className={s.headerWrapper}>
+            <div className={s.header}>
+                <div className={s.logo}>
+                    <img src={logo} alt=""/>
+                    <span>Friends Finder</span>
+                </div>
+                <div className={s.loginBlock}>
+                    {props.isAuth &&
+                        <div>
+                            <span>{props.login}</span>
+                            <button onClick={props.logout} className={commonStyles.button}>Log out</button>
+                        </div>
+                    }
+                    {/*{props.isAuth && <img src={props.userAvatar || userPhoto} alt=""/>}*/}
+                </div>
             </div>
-            <div className={s.loginBlock}>
-                {props.isAuth &&
-                    <div>
-                        <span>{props.login}</span>
-                        <button onClick={props.logout} className={commonStyles.button}>Log out</button>
-                    </div>
-                }
-                {/*{props.isAuth && <img src={props.userAvatar || userPhoto} alt=""/>}*/}
-            </div>
-
         </header>
     )
 }
