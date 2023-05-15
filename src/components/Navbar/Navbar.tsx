@@ -5,7 +5,7 @@ import rightArrow from '../../assets/images/right-triangle-svgrepo-com.png'
 import leftArrow from '../../assets/images/left-triangle-svgrepo-com.svg'
 
 const Navbar = () => {
-    let [menuIsOpen, setMenuIsOpen] = useState(true);
+    let [menuIsOpen, setMenuIsOpen] = useState(false);
     const onBurgerBtnClick = () => {
         setMenuIsOpen(!menuIsOpen)
     };

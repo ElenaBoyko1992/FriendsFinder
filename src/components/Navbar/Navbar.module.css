@@ -48,3 +48,9 @@
 
 }
 
+@media screen and (min-width: 981px) {
+    .items {
+        display: block;
+    }
+
+}
