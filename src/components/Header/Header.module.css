@@ -2,7 +2,7 @@
     grid-area: h;
     position: fixed;
     width: 100%;
-    top:0;
+    top: 0;
     left: 0;
     z-index: 3;
 
@@ -34,17 +34,39 @@
     display: flex;
     align-items: center;
     color: #ffffff;
+
 }
+
 .loginBlock a {
     color: white;
     font-weight: 700;
     text-decoration: none;
 }
+
 .loginBlock a:hover {
     text-decoration: underline;
 }
+
 .loginBlock span,
 .loginBlock button {
-   margin-right: 10px;
+    margin-right: 10px;
 }
 
+@media screen and (max-width: 600px) {
+    .logo {
+        font-size: 17px;
+    }
+
+    .loginBlock {
+        flex-direction: column;
+
+    }
+
+    .loginBlock button {
+        padding: 1px 15px;
+    }
+
+    .loginBlock span {
+       margin-bottom: 5px;
+    }
+}

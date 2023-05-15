@@ -20,5 +20,12 @@
     margin-top: 10px;
 }
 
+@media screen and (max-width: 600px) {
+    .postsBlock {
+        margin: 0 auto;
+        max-width: 300px;
+    }
+
+}
 
 
