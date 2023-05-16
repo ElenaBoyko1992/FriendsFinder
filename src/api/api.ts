@@ -9,7 +9,7 @@ const instance = axios.create({
     //поэтому далее внизу по коду везде указанг только сокращенный (без базового) URL
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        "API-KEY": "f49178a7-6bdf-4301-836a-a758a2a7fb65"
+        "API-KEY": "2fee79fc-25e6-48d9-8e58-608ff8543884"
     }
 })
 
