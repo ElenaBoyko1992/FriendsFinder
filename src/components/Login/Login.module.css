@@ -26,3 +26,13 @@
 .rememberMe span {
     margin: 0 0 10px 10px;
 }
+
+.testAccountData {
+    font-weight: 700;
+    line-height: 3;
+}
+
+.data {
+    color: red;
+    line-height: 1.2;
+}

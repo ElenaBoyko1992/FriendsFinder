@@ -35,25 +35,39 @@ const LoginForm: FC<InjectedFormProps<FormDataType, LoginReduxFormType> & LoginR
                                                                                                      captchaUrl
                                                                                                  }) => {
         return (
-            <form onSubmit={handleSubmit}>
-                {createField('Email', 'email', [required], Input)}
-                {createField('Password', 'password', [required], Input, {type: 'password'})}
-                <div className={s.rememberMe}>
-                    {createField(null, 'rememberMe', [], Input, {type: 'checkbox'})}
-                    <span>remember me</span>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    {createField('Email', 'email', [required], Input)}
+                    {createField('Password', 'password', [required], Input, {type: 'password'})}
+                    <div className={s.rememberMe}>
+                        {createField(null, 'rememberMe', [], Input, {type: 'checkbox'})}
+                        <span>remember me</span>
+                    </div>
+
+
+                    {captchaUrl && <img src={captchaUrl}/>}
+                    {captchaUrl && createField('Symbols from image', 'captcha', [required], Input)}
+
+                    {error && <div className={style.formSummaryError}>
+                        {error}
+                    </div>}
+                    <div>
+                        <button className={commonStyles.button}>Login</button>
+                    </div>
+                </form>
+                <br/>
+                <br/>
+                <div className={s.testAccountData}>
+                    To access, please enter the test account data:
+                    <div className={s.data}>
+                        Email: free@samuraijs.com
+                        <br/>
+                        Password: free
+                    </div>
+
                 </div>
 
-
-                {captchaUrl && <img src={captchaUrl}/>}
-                {captchaUrl && createField('Symbols from image', 'captcha', [required], Input)}
-
-                {error && <div className={style.formSummaryError}>
-                    {error}
-                </div>}
-                <div>
-                    <button className={commonStyles.button}>Login</button>
-                </div>
-            </form>
+            </div>
         );
     }
 ;
