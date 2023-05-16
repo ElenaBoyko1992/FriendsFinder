@@ -1,8 +1,14 @@
+.paginatorWrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .paginator {
     margin-bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .button {
@@ -14,7 +20,6 @@
 
 .button img {
     height: 100%;
-
 }
 
 .pageNumber {
@@ -32,4 +37,10 @@
     border-radius: 50%;
     background-color: #27aae1;
     color: #ffffff;
+}
+
+@media screen and (max-width: 980px) {
+    .paginator {
+        justify-content: flex-start;
+    }
 }
