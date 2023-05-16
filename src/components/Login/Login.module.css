@@ -29,10 +29,10 @@
 
 .testAccountData {
     font-weight: 700;
-    line-height: 3;
+
 }
 
 .data {
     color: red;
-    line-height: 1.2;
+    margin-top: 10px;
 }
