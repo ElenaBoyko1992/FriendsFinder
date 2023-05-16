@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/FriendsFinder/static/css/main.9068d06d.css",
-    "main.js": "/FriendsFinder/static/js/main.6172d495.js",
+    "main.css": "/FriendsFinder/static/css/main.f8586fe7.css",
+    "main.js": "/FriendsFinder/static/js/main.b1ef8b2a.js",
     "static/css/591.139f8d4a.chunk.css": "/FriendsFinder/static/css/591.139f8d4a.chunk.css",
     "static/js/591.55555176.chunk.js": "/FriendsFinder/static/js/591.55555176.chunk.js",
     "static/css/286.d37d356c.chunk.css": "/FriendsFinder/static/css/286.d37d356c.chunk.css",
@@ -14,15 +14,15 @@
     "static/media/right-gray-arrow-svgrepo-com.svg": "/FriendsFinder/static/media/right-gray-arrow-svgrepo-com.8ad63f20422ab4c29511c0248971e357.svg",
     "static/media/right-arrow-svgrepo-com.svg": "/FriendsFinder/static/media/right-arrow-svgrepo-com.5b88d8f4fdc81a7acd591dd344b84b21.svg",
     "static/media/left-arrow-svgrepo-com.svg": "/FriendsFinder/static/media/left-arrow-svgrepo-com.4a6aa8b4ca9fbd30a41a6cef7536c1c8.svg",
-    "main.9068d06d.css.map": "/FriendsFinder/static/css/main.9068d06d.css.map",
-    "main.6172d495.js.map": "/FriendsFinder/static/js/main.6172d495.js.map",
+    "main.f8586fe7.css.map": "/FriendsFinder/static/css/main.f8586fe7.css.map",
+    "main.b1ef8b2a.js.map": "/FriendsFinder/static/js/main.b1ef8b2a.js.map",
     "591.139f8d4a.chunk.css.map": "/FriendsFinder/static/css/591.139f8d4a.chunk.css.map",
     "591.55555176.chunk.js.map": "/FriendsFinder/static/js/591.55555176.chunk.js.map",
     "286.d37d356c.chunk.css.map": "/FriendsFinder/static/css/286.d37d356c.chunk.css.map",
     "286.882f5d93.chunk.js.map": "/FriendsFinder/static/js/286.882f5d93.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9068d06d.css",
-    "static/js/main.6172d495.js"
+    "static/css/main.f8586fe7.css",
+    "static/js/main.b1ef8b2a.js"
   ]
 }
